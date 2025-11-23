@@ -15,6 +15,9 @@ alias gc='git commit -m'
 alias gp='git push'
 alias gd='git diff'
 
+# Rails aliases
+alias precom='bin/rails assets:precompile'
+
 # Editor aliases
 alias v=nvim
 
@@ -25,3 +28,7 @@ alias attach='tmux attach -t'
 
 # Python environment
 alias activate='source ./.venv/bin/activate'
+
+alias tile='aerospace layout tiles'
+
+alias qbuild='NOMAD_TOKEN="$(vault kv get -field=admin-token secret/nomad/tokens)" && curl -X POST $NOMAD_ADDR/v1/job/quartz-builder/dispatch -H "X-Nomad-Token: $NOMAD_TOKEN" -d "{}"'

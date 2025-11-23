@@ -11,4 +11,9 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Private/callot/bin:$PATH"
 
 # ZK notebook directory
-export ZK_NOTEBOOK_DIR="$HOME/Documents/notes"
+# TODO: Migrate to /mnt/nas/notes with NFS (see TODO.md)
+export ZK_NOTEBOOK_DIR="/Volumes/notes"
+
+# Homelab server addresses (private network)
+export NOMAD_ADDR=http://192.168.40.104:4646
+export VAULT_ADDR=http://192.168.40.104:8200
