@@ -1,0 +1,6 @@
+# External repositories managed by chezmoi
+
+[".config/nvim"]
+    type = "git-repo"
+    url = "git@github.com:chiyonn/nvim.git"
+    refreshPeriod = "168h"  # Update weekly
