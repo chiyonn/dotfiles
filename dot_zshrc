@@ -34,3 +34,11 @@ done
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(mise activate zsh)"
+
+# Chezmoi: Warn if files were edited directly
+if command -v chezmoi &> /dev/null; then
+  if ! chezmoi diff --no-pager 2>&1 | grep -q "^$"; then
+    echo "⚠️  Dotfiles were edited directly! Run 'chezmoi diff' to see changes."
+    echo "    Use 'chezmoi edit <file>' to edit properly, or 'chezmoi re-add <file>' to sync."
+  fi
+fi
