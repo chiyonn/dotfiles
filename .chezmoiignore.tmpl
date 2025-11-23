@@ -1,0 +1,13 @@
+# Ignore karabiner automatic backups
+.config/karabiner/automatic_backups/
+
+# macOS only files (ignore on Linux)
+{{- if ne .chezmoi.os "darwin" }}
+.config/aerospace/
+.config/karabiner/
+{{- end }}
+
+# Linux only files (ignore on macOS)
+{{- if ne .chezmoi.os "linux" }}
+# .config/i3/  # 将来Linux用のi3設定を追加したらここに
+{{- end }}

@@ -3,7 +3,11 @@ set-option -ga terminal-overrides '*:Tc'
 set-option -g history-limit 100000
 
 bind -T copy-mode-vi V send-keys -X select-line
+{{- if eq .chezmoi.os "darwin" }}
 bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+{{- else }}
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -selection clipboard"
+{{- end }}
 
 bind s split-window -v -c "#{pane_current_path}"
 bind v split-window -h -c "#{pane_current_path}"
