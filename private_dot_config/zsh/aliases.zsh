@@ -18,8 +18,9 @@ alias gd='git diff'
 # Rails aliases
 alias precom='bin/rails assets:precompile'
 
-# Editor aliases
+# App aliases
 alias v=nvim
+alias ch=chezmoi
 
 # Tmux aliases
 alias t=tmux
