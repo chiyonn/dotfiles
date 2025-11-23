@@ -1,0 +1,12 @@
+[font]
+normal = { family = "Hack Nerd Font", style = "Regular" }
+size = 14.0
+
+[terminal.shell]
+program = "/bin/zsh"
+args = ["-c", "tmux new-session -A -s home; exec zsh"]
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001b[13;2u"
