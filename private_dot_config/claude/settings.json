@@ -10,6 +10,13 @@
     "DISABLE_AUTOUPDATER": "true",
     "DISABLE_MICROCOMPACT": "true"
   },
+  "permissions": {
+    "allow": [
+      "WebSearch"
+    ],
+    "deny": [],
+    "ask": []
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -34,12 +41,5 @@
       }
     ]
   },
-  "alwaysThinkingEnabled": true,
-  "permissions": {
-    "allow": [
-      "WebSearch"
-    ],
-    "deny": [],
-    "ask": []
-  }
+  "alwaysThinkingEnabled": false
 }
