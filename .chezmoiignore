@@ -1,0 +1,3 @@
+# Files that are automatically updated by applications
+# These files should not be managed by chezmoi to avoid constant diff warnings
+.config/claude/settings.json
