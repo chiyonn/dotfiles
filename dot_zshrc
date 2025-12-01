@@ -1,44 +1,102 @@
-# Chezmoi: Warn if files were edited directly
-if command -v chezmoi &> /dev/null; then
-  if [ -n "$(chezmoi diff --no-pager 2>&1)" ]; then
-    echo "⚠️  Dotfiles were edited directly! Run 'chezmoi diff' to see changes."
-    echo "    Use 'chezmoi edit <file>' to edit properly, or 'chezmoi re-add <file>' to sync."
-  fi
-fi
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Enable Powerlevel10k instant prompt. Should stay at the very top.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# OS Detection
+case "$(uname -s)" in
+  Darwin) OS="macos" ;;
+  Linux)  OS="linux" ;;
+  *)      OS="unknown" ;;
+esac
 
+# ===== Auto-install Oh-My-Zsh (silent if already installed) =====
 export ZSH="$HOME/.oh-my-zsh"
+if [[ ! -d "$ZSH" ]]; then
+  print -P "%F{yellow}Installing Oh-My-Zsh...%f"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+# ===== Auto-install Powerlevel10k (silent if already installed) =====
+P10K_DIR="${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k"
+if [[ ! -d "$P10K_DIR" ]]; then
+  print -P "%F{yellow}Installing Powerlevel10k...%f"
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$P10K_DIR"
+fi
+
+# ===== Auto-install zsh plugins (silent if already installed) =====
+ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
+
+if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]]; then
+  print -P "%F{yellow}Installing zsh-autosuggestions...%f"
+  git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+fi
+
+if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]]; then
+  print -P "%F{yellow}Installing zsh-syntax-highlighting...%f"
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+fi
+
+# ===== OS-specific configuration =====
+if [[ "$OS" == "macos" ]]; then
+  # Homebrew
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  # macOS-specific plugins
+  plugins=(
+    git
+    brew
+    macos
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    fzf
+  )
+elif [[ "$OS" == "linux" ]]; then
+  # Linux-specific plugins (no brew/macos/fzf-plugin)
+  plugins=(
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+  )
+fi
+
 export ZSH_CONFIG_DIR="$HOME/.config/zsh"
-
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
-plugins=(
-  git
-  brew
-  macos
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  fzf
-)
 
 source $ZSH/oh-my-zsh.sh
 
+# Source modular config files
 for config in exports aliases functions completions prompt; do
   [[ -f "$ZSH_CONFIG_DIR/$config.zsh" ]] && source "$ZSH_CONFIG_DIR/$config.zsh"
 done
 [[ -f "$ZSH_CONFIG_DIR/local.zsh" ]] && source "$ZSH_CONFIG_DIR/local.zsh"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# ===== OS-specific post-config =====
+if [[ "$OS" == "macos" ]]; then
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+elif [[ "$OS" == "linux" ]]; then
+  # fzf on Fedora/Linux (if installed)
+  if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
+    source /usr/share/fzf/shell/key-bindings.zsh
+  fi
+  if [[ -f /usr/share/fzf/shell/completion.zsh ]]; then
+    source /usr/share/fzf/shell/completion.zsh
+  fi
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-eval "$(mise activate zsh)"
+# mise (version manager)
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
+# Chezmoi: Warn if files were edited directly (at the end to avoid instant prompt warning)
+if command -v chezmoi &> /dev/null; then
+  if [[ -n "$(chezmoi diff --no-pager 2>&1)" ]]; then
+    print -P "%F{yellow}Dotfiles were edited directly! Run 'chezmoi diff' to see changes.%f"
+  fi
+fi
