@@ -1,9 +1,15 @@
 # Common aliases for both macOS and Linux
 
-# macOS-specific ls aliases
-alias ls='ls -G'
-alias ll='ls -lG'
-alias la='ls -laG'
+# ls aliases (cross-platform)
+if [[ "$(uname)" == "Darwin" ]]; then
+  alias ls='ls -G'
+  alias ll='ls -lG'
+  alias la='ls -laG'
+else
+  alias ls='ls --color=auto'
+  alias ll='ls -l --color=auto'
+  alias la='ls -la --color=auto'
+fi
 
 # Git aliases
 alias gb='git branch'
