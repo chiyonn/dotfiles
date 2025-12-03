@@ -1,6 +1,6 @@
 # for input method
 # required: fcitx5, mozc
-exec fcitx5 &
+exec fcitx5 -d
 exec flatpak run com.discordapp.Discord
 
 # for screen sharing:
