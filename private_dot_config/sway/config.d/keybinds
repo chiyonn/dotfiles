@@ -19,7 +19,7 @@
     #       $mod+r none
     #       $mod+s none
     #       $mod+t none
-    bindsym $mod+u exec $browser --new-window "https://claude.ai/new?incognito"
+    bindsym $mod+u exec $browser "https://claude.ai/new?incognito"
     bindsym $mod+v split toggle
     #       $mod+w none
     #       $mod+x none
