@@ -17,3 +17,9 @@ export ZK_NOTEBOOK_DIR="/Volumes/notes"
 # Homelab server addresses (private network)
 export NOMAD_ADDR=http://192.168.40.104:4646
 export VAULT_ADDR=http://192.168.40.104:8200
+
+# Input Method
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
