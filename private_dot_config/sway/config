@@ -1,0 +1,60 @@
+### common valiables
+set $mod Mod1
+set $sub Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+# apps
+set $term foot
+set $filer nautilus
+set $browser brave-browser
+set $menu wofi | grep -v '^$' | xargs swaymsg exec --
+
+### window control
+floating_modifier $mod normal
+
+# gaps
+default_border pixel 2
+gaps inner 2
+gaps outer 2
+
+
+# colors
+#   palette
+set $cl_high #83a598
+set $cl_indi #928374
+set $cl_back #282828
+set $cl_fore #ebdbb2
+set $cl_urge #fb4934
+
+#                           border   bg       text     indi     childborder
+client.focused          $cl_high $cl_high $cl_fore $cl_indi $cl_high
+client.focused_inactive #3c3836  #3c3836  $cl_fore #3c3836  #3c3836
+client.unfocused        #3c3836  #3c3836  $cl_fore #3c3836  #3c3836
+client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
+
+
+### idle control
+set $wallpaper "$HOME/.config/sway/background.png"
+exec swayidle -w \
+    timeout 1800 'swaylock -f -i $wallpaper' \
+    timeout 3600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    before-sleep 'swaylock -f -i $wallpaper'
+
+bindsym $mod+Backspace exec swaylock -f -i $wallpaper
+bindsym $mod+Shift+BackSpace exec systemctl suspend
+
+
+### status bar
+bar {
+    swaybar_command waybar
+}
+
+for_window [app_id="blueman-manager"] floating enable, border pixel 2
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, border pixel 2
+
+include /etc/sway/config.d/*
+include $HOME/.config/sway/config.d/*

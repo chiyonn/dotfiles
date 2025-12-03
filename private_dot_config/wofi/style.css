@@ -1,0 +1,26 @@
+window {
+    background-color: rgba(40, 40, 40, 0.95); /* dark0 */
+    border-radius: 4px;
+    padding: 10px;
+}
+
+#input {
+    margin: 5px;
+    padding: 5px;
+    border: none;
+    background-color: #3c3836; /* dark1 */
+    color: #ebdbb2; /* light1 */
+}
+
+#entry {
+    padding: 5px;
+    margin: 2px;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #ebdbb2; /* light1 */
+}
+
+#entry:selected {
+    background-color: #458588; /* neutral_blue */
+    color: #fbf1c7; /* light0 */
+}

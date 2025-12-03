@@ -39,3 +39,6 @@ alias activate='source ./.venv/bin/activate'
 alias tile='aerospace layout tiles'
 
 alias qbuild='NOMAD_TOKEN="$(vault kv get -field=admin-token secret/nomad/tokens)" && curl -X POST $NOMAD_ADDR/v1/job/quartz-builder/dispatch -H "X-Nomad-Token: $NOMAD_TOKEN" -d "{}"'
+
+# System aliases
+alias reboot='systemctl soft-reboot'

@@ -1,0 +1,9 @@
+[wofi]
+width=400
+height=500
+columns=1
+allow_markup=true
+show=drun
+prompt=❯
+term=foot
+

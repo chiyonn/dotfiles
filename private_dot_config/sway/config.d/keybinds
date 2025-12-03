@@ -1,0 +1,73 @@
+# $mod+[a-z] keybindings
+    bindsym $mod+a exec $HOME/.config/sway/scripts/bluetooth_switch.sh
+    #       $mod+b none
+    #       $mod+c none
+    bindsym $mod+d [class="discord"] scratchpad show
+    bindsym $mod+e exec $filer
+    bindsym $mod+f fullscreen
+    #       $mod+g none
+    #       $mod+h binded to window focus left
+    #       $mod+i none
+    #       $mod+j binded to window focus down
+    #       $mod+k binded to window focus up
+    #       $mod+l binded to window focus right
+    #       $mod+m binded to music mode
+    #       $mod+n binded to move to next workspace
+    bindsym $mod+o exec $browser
+    #       $mod+p binded to move to previous workspace
+    bindsym $mod+q kill
+    #       $mod+r none
+    #       $mod+s none
+    #       $mod+t none
+    bindsym $mod+u exec $browser --new-window "https://chatgpt.com/?temporary-chat=true"
+    bindsym $mod+v split toggle
+    #       $mod+w none
+    #       $mod+x none
+    bindsym $mod+y exec $browser --new-window "https://www.youtube.com/"
+    #       $mod+z none
+
+    bindsym $mod+Return exec $term
+    bindsym $mod+space [app_id="foot"] scratchpad show
+    bindsym $mod+slash exec $menu
+    bindsym $mod+minus scratchpad show
+
+# $mod+Shift+[a-z] keybindings
+    #       $mod+Shift+a none
+    #       $mod+Shift+b none
+    bindsym $mod+Shift+c reload
+    #       $mod+Shift+d none
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    #       $mod+Shift+f none
+    #       $mod+Shift+g none
+    #       $mod+Shift+h binded to move window left
+    #       $mod+Shift+i none
+    #       $mod+Shift+j binded to move window down
+    #       $mod+Shift+k binded to move window up
+    #       $mod+Shift+l binded to move window right
+    #       $mod+Shift+m none
+    #       $mod+Shift+n none
+    #       $mod+Shift+o none
+    bindsym $mod+Shift+p sticky
+    #       $mod+Shift+q none
+    #       $mod+Shift+r none
+    bindsym $mod+Shift+s exec grim -g "$(slurp)" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png
+    #       $mod+Shift+t none
+    #       $mod+Shift+u none
+    #       $mod+Shift+v none
+    #       $mod+Shift+w none
+    #       $mod+Shift+x none
+    #       $mod+Shift+y none
+    #       $mod+Shift+z none
+
+    bindsym $mod+Shift+minus floating toggle
+    bindsym $mod+Shift+space move scratchpad
+
+# $mod+[0-9] keybindings
+# -> see config.d/workspace
+
+# $mod+Shift+[0-9] keybindings
+# -> see config.d/workspace
+
+# function keys
+    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym XF86MonBrightnessUp exec brightnessctl set +5%

@@ -1,0 +1,75 @@
+* {
+    font-family: monospace;
+    font-size: 16px;
+    color: #ebdbb2; /* light1 */
+}
+
+window#waybar {
+    background: #282828; /* dark0 */
+    border: none;
+    padding: 0;
+}
+
+#window,
+#workspaces,
+#network,
+#backlight,
+#pulseaudio,
+#temperature,
+#cpu,
+#memory,
+#disk,
+#battery,
+#clock {
+    padding: 4px;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+/* Workspaces */
+#workspaces button {
+    border: none;
+    margin: 0;
+    border-radius: 0;
+    color: #ebdbb2;
+    background: #3c3836; /* dark1 */
+}
+
+#workspaces button.focused {
+    background: #504945; /* dark2 */
+    color: #fbf1c7; /* light0 */
+}
+
+#battery.charging {
+    color: #83a598; /* bright_blue */
+}
+
+#temperature.cold {
+    color: #83a598; /* bright_blue */
+}
+
+/* Normal status */
+#battery:not(.charging):not(.warning):not(.critical),
+#temperature {
+    color: #b8bb26; /* bright_green */
+}
+
+/* Warning states */
+#temperature.warning,
+#battery.warning {
+    color: #fabd2f; /* bright_yellow */
+}
+
+/* Critical states */
+#battery.critical,
+#temperature.critical {
+    color: #fb4934; /* bright_red */
+}
+
+/* Optional: blink for critical status (can be removed for more minimal look) */
+@keyframes blink-critical {
+    50% {
+        opacity: 0.5;
+    }
+}
