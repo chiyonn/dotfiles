@@ -15,7 +15,7 @@
     #       $mod+n binded to move to next workspace
     bindsym $mod+o exec $browser
     #       $mod+p binded to move to previous workspace
-    bindsym $mod+q kill
+    #       $mod+q none
     #       $mod+r none
     #       $mod+s none
     #       $mod+t none
@@ -48,7 +48,7 @@
     #       $mod+Shift+n none
     #       $mod+Shift+o none
     bindsym $mod+Shift+p sticky
-    #       $mod+Shift+q none
+    bindsym $mod+Shift+q kill
     #       $mod+Shift+r none
     bindsym $mod+Shift+s exec grim -g "$(slurp)" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png
     #       $mod+Shift+t none
@@ -71,3 +71,6 @@
 # function keys
     bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+
+# corne cherry v4
+    bindsym XF86AudioPlay exec playerctl play-pause

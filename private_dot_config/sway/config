@@ -10,7 +10,7 @@ set $right l
 # apps
 set $term foot
 set $filer nautilus
-set $browser brave-browser
+set $browser firefox
 set $menu wofi | grep -v '^$' | xargs swaymsg exec --
 
 ### window control

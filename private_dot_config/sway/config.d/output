@@ -2,7 +2,7 @@
 output * bg $HOME/.config/sway/background.png fill
 
 # display placement
-output eDP-1 scale 1.0
+output eDP-1 scale 1.25 
 output eDP-1 pos 3840 720 res 2560x1440
 output HDMI-A-1 scale 1.0
 output HDMI-A-1 pos 0 0 res 3840x2160
