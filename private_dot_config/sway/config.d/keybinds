@@ -1,7 +1,7 @@
 # $mod+[a-z] keybindings
     # bindsym $mod+a exec $HOME/.config/sway/scripts/bluetooth_switch.sh
     bindsym $mod+a exec $HOME/.config/sway/scripts/audio_output.sh
-    #       $mod+b none
+    bindsym $mod+b exec $HOME/.config/sway/scripts/bluetooth_switch.sh
     #       $mod+c none
     bindsym $mod+d [class="discord"] scratchpad show
     bindsym $mod+e exec $filer
