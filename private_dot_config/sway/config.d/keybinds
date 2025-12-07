@@ -1,9 +1,8 @@
 # $mod+[a-z] keybindings
-    # bindsym $mod+a exec $HOME/.config/sway/scripts/bluetooth_switch.sh
     bindsym $mod+a exec $HOME/.config/sway/scripts/audio_output.sh
     bindsym $mod+b exec $HOME/.config/sway/scripts/bluetooth_switch.sh
     #       $mod+c none
-    bindsym $mod+d [class="discord"] scratchpad show
+    #       $mod+d none
     bindsym $mod+e exec $filer
     bindsym $mod+f fullscreen
     #       $mod+g none
@@ -24,7 +23,7 @@
     bindsym $mod+v split toggle
     #       $mod+w none
     #       $mod+x none
-    bindsym $mod+y exec $browser --new-window "https://www.youtube.com/"
+    #       $mod+y none
     #       $mod+z none
 
     bindsym $mod+Return exec $term
