@@ -4,3 +4,6 @@
 
 # Repository documentation (no need to deploy to home directory)
 README.md
+
+# Secret environment variables (managed locally per machine)
+.zshenv

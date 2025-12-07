@@ -1,0 +1,9 @@
+# Secret environment variables (not tracked by chezmoi)
+# Copy this file to ~/.zshenv and fill in actual values
+
+# Homelab server addresses (private network)
+export NOMAD_ADDR=http://192.168.40.104:4646
+export VAULT_ADDR=http://192.168.40.104:8200
+
+# Nomad admin token (required for qbuild alias)
+export NOMAD_TOKEN="your-nomad-admin-token-here"
