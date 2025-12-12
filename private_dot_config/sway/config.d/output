@@ -1,5 +1,5 @@
-# wallpaper
-output * bg $HOME/.config/sway/background.png fill
+# background color (gruvbox dark)
+output * bg #282828 solid_color
 
 # display placement
 output eDP-1 scale 1.25 

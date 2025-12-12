@@ -38,13 +38,13 @@ client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
 
 
 ### idle control
-set $wallpaper "$HOME/.config/sway/background.png"
+set $lockcolor 282828
 exec swayidle -w \
-    timeout 1800 'swaylock -f -i $wallpaper' \
+    timeout 1800 'swaylock -f -c $lockcolor' \
     timeout 3600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-    before-sleep 'swaylock -f -i $wallpaper'
+    before-sleep 'swaylock -f -c $lockcolor'
 
-bindsym $mod+Backspace exec swaylock -f -i $wallpaper
+bindsym $mod+Backspace exec swaylock -f -c $lockcolor
 bindsym $mod+Shift+BackSpace exec systemctl suspend
 
 
