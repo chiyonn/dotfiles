@@ -1,12 +1,11 @@
 # for input method
 # required: fcitx5, mozc
 exec fcitx5 -d
-exec flatpak run com.discordapp.Discord
 
 # for screen sharing:
 # require(arch): pacman -S pipewire xdg-desktop-portal xdg-desktop-portal-wlr
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
-exec_always --no-startup-id ~/.config/sway/scripts/clamshell.sh
+# exec_always --no-startup-id ~/.config/sway/scripts/clamshell.sh
 
 exec --no-startup-id ~/.config/sway/scripts/scratchpad_firefox.sh
