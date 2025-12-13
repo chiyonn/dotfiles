@@ -104,9 +104,99 @@ Voidによる技術力評価。セッションごとに更新。
 - `:` (コロン) コマンドで出力なしコメント
 - nmcli con mod でネットワーク設定変更
 
+### Learned (2024-12-14)
+- `head -1` のハイフン必要性（`head 1`はエラー）
+- `2>&1` の正しい順番（`2&>1`ではない）
+- `-yq` vs `-y -q` はコマンド側が解釈（shell関係なし）
+- zshでの `$(...)` はエスケープ不要（変にいじると壊れる）
+- `/proc/cpuinfo`, `free -h`, `lspci` でスペック確認
+
 ### Gaps
 - エラーメッセージを丁寧に読む習慣が弱い
 - manページや--helpの英語を読み飛ばす傾向
+- シェルスクリプト書く力が弱い（今回ギブアップ）
+
+---
+
+## sway/i3 Window Manager #linux #desktop
+
+**Level: Beginner → Intermediate (進行中)**
+
+### Knows
+- swayの基本操作、keybinds設定
+- workspaceの概念
+
+### Learned (2024-12-14)
+- `swaymsg -t get_tree` でウィンドウツリー確認
+- `swaymsg -t subscribe '["window"]'` でイベント監視
+- criteriaの使い方 (`[app_id="..."]`, `[con_mark="..."]`)
+- markの概念（ウィンドウに名札をつける）
+- scratchpadの運用方法
+- `floating enable` が `move position` の前提条件
+- `exec` vs `exec_always` の違い
+- 複数ウィンドウでcriteria衝突する問題とmark回避策
+
+### Gaps
+- swaymsg のその他のメッセージタイプ
+- IPC全般の理解
+
+---
+
+## Wayland/PipeWire #linux #desktop
+
+**Level: Beginner**
+
+### Knows
+- Waylandがディスプレイサーバーであること
+- PipeWireが音声/映像のルーティングすること
+
+### Learned (2024-12-14)
+- xdg-desktop-portal-wlrの役割（画面共有の仲介）
+- PipeWireのtransform情報（回転情報のメタデータ）
+- 縦置きモニターの画面共有問題（ブラウザ側未対応）
+- OBS仮想カメラ (v4l2loopback) での回避策
+
+### Gaps
+- PipeWireの詳細な仕組み
+- xdg-desktop-portalの設定
+
+---
+
+## Package Management (dnf/rpm) #linux #fedora
+
+**Level: Beginner → Intermediate (進行中)**
+
+### Knows
+- `dnf install`, `dnf search` の基本
+
+### Learned (2024-12-14)
+- `-y` (自動yes), `-q` (quiet) オプション
+- RPM Fusionリポジトリの追加方法
+- `akmod` の役割（カーネル更新時に自動ビルド）
+- `akmods --force` でビルドトリガー
+- カーネルバージョンとkernel-develの対応問題
+
+### Gaps
+- dnfの詳細オプション
+- rpm直接操作
+
+---
+
+## Kernel Modules #linux
+
+**Level: Beginner**
+
+### Knows
+- カーネルモジュールという概念がある
+
+### Learned (2024-12-14)
+- `lsmod` でロード済みモジュール確認
+- `modprobe` でモジュールロード
+- v4l2loopbackの用途（仮想カメラデバイス）
+
+### Gaps
+- モジュールパラメータ
+- 永続化設定 (/etc/modules-load.d/)
 
 ---
 
@@ -116,18 +206,24 @@ Voidによる技術力評価。セッションごとに更新。
 - 仮説を立てて検証する姿勢がある
 - 自分の思考過程を言語化できる（: コマンドでコメント残してた）
 - 「これ前にやったはず」という記憶はある（実行はできてないが）
+- **YAGNIの判断ができる**: 「退避機能は使用頻度低い」と削った (2024-12-14)
+- **ギブアップを言える**: 無理なものは無理と正直に言える (2024-12-14)
+- **エラーから学べた**: `floating enable`必要と自分で理解 (2024-12-14)
 
 ### Weaknesses
 - **エラーメッセージを読まない**: 最大の課題。情報は目の前にあるのに見てない
 - **英語回避傾向**: ドキュメントに答えが書いてあっても読み飛ばす
 - **機密情報管理**: トークンの保存場所を忘れる。chezmoiでの管理方針が曖昧
+- **chezmoi apply忘れ**: 編集したけど反映されてなかった (2024-12-14)
+- **構文の細かいミス**: `head -1`, `2>&1` など (2024-12-14)
 
 ### Recommendations
 1. エラー出たら、まず全文読んでから行動
 2. 英語のエラーメッセージは翻訳してでも理解する
 3. 機密情報は一元管理する場所を決める（Vault? パスワードマネージャー?）
 4. TASK.md / PLANNING.md を実態と同期させる習慣
+5. chezmoi編集後は `chezmoi apply` を習慣化する
 
 ---
 
-*Last updated: 2024-12-13 by Void*
+*Last updated: 2024-12-14 by Void*
