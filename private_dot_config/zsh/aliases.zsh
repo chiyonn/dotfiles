@@ -44,4 +44,6 @@ alias tile='aerospace layout tiles'
 alias qbuild='curl -X POST $NOMAD_ADDR/v1/job/quartz-builder/dispatch -H "X-Nomad-Token: $NOMAD_TOKEN" -d "{}"'
 
 # System aliases
-alias reboot='systemctl soft-reboot'
+# alias reboot='systemctl soft-reboot'
+# Kernel module state persistence across soft-reboot causes hardware issues (e.g. bluetooth)
+# Module Reload also solve this but use nomal reboot is acceptable.
