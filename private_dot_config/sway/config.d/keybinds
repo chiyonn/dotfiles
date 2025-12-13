@@ -27,7 +27,7 @@
     #       $mod+z none
 
     bindsym $mod+Return exec $term
-    bindsym $mod+space [app_id="foot"] scratchpad show
+    bindsym $mod+space [con_mark="sp"] scratchpad show
     bindsym $mod+slash exec $menu
     bindsym $mod+minus scratchpad show
 

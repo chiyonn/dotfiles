@@ -8,3 +8,5 @@ exec flatpak run com.discordapp.Discord
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 exec_always --no-startup-id ~/.config/sway/scripts/clamshell.sh
+
+exec --no-startup-id ~/.config/sway/scripts/scratchpad_firefox.sh
