@@ -1,10 +1,9 @@
 #!/bin/bash
 
-URL="${1:-https://open.spotify.com}"
 MARK="sp"
 
 # firefoxをバックグラウンドで起動
-firefox --new-window "$URL" &
+firefox --new-window "$@" &
 
 # 新しいfirefoxウィンドウが開くのを待ってmark付けてscratchpadへ
 swaymsg -t subscribe '["window"]' | while read -r event; do
