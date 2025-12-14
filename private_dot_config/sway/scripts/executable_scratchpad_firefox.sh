@@ -2,8 +2,20 @@
 
 MARK="sp"
 
+# 既にspマークを持つウィンドウがあれば何もしない
+if swaymsg -t get_tree | jq -e ".. | select(.marks? and (.marks | contains([\"$MARK\"])))" > /dev/null 2>&1; then
+  notify-send "scratchpad init" "既にscratchpadが存在します"
+  exit 0
+fi
+
+# 既にFirefoxが起動していたら通知して終了
+if pgrep -x firefox > /dev/null; then
+  notify-send "scratchpad init" "Firefoxが既に起動しています。先にFirefoxを閉じてください。"
+  exit 1
+fi
+
 # firefoxをバックグラウンドで起動
-firefox --new-window "$@" &
+firefox --new-window &
 
 # 新しいfirefoxウィンドウが開くのを待ってmark付けてscratchpadへ
 swaymsg -t subscribe '["window"]' | while read -r event; do

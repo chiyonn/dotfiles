@@ -9,6 +9,7 @@ export LANG=en_US.UTF-8
 # Path additions
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Private/callot/bin:$PATH"
+export PATH="$HOME/.config/sway/scripts:$PATH"
 
 # ZK notebook directory
 # TODO: Migrate to /mnt/nas/notes with NFS (see TODO.md)
@@ -18,4 +19,3 @@ export ZK_NOTEBOOK_DIR="/Volumes/notes"
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
-

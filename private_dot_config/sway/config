@@ -13,6 +13,9 @@ set $filer nautilus
 set $browser firefox
 set $menu wofi | grep -v '^$' | xargs swaymsg exec --
 
+# short handlers
+set $scratchpad_call ~/.config/sway/scripts/scratchpad_firefox.sh
+
 ### window control
 floating_modifier $mod normal
 

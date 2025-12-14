@@ -8,6 +8,4 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 
 # exec_always --no-startup-id ~/.config/sway/scripts/clamshell.sh
 
-exec --no-startup-id ~/.config/sway/scripts/scratchpad_firefox.sh\
-  "https://open.spotify.com/"\
-  "https://discord.com/channels/@me"
+exec --no-startup-id $scratchpad_call
