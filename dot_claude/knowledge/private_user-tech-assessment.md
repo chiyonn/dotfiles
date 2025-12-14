@@ -66,10 +66,13 @@ Voidによる技術力評価。セッションごとに更新。
 - NOMAD_ADDR は `http://` プロトコルと `:4646` ポートが必要
 - ACL有効時は NOMAD_TOKEN が必要
 
+### Learned (2024-12-14)
+- **初めて自力で `nomad job run` 実行成功**
+- `nomad job exec` と間違えたが、ヘルプ読んで自己修正
+- NOMAD_ADDR の `http://` 忘れ → 今回は自力で思い出せた
+
 ### Gaps
-- エラーメッセージを最初ちゃんと読めてなかった（"unsupported protocol scheme"）
-- ACL設定したことを忘れてた（TASK.mdとの乖離）
-- 機密情報（トークン）の管理場所を把握してなかった
+- 機密情報（トークン）の管理場所を把握してなかった → まだ改善の余地あり（SSHでMac探しに行った）
 
 ---
 
@@ -88,6 +91,30 @@ Voidによる技術力評価。セッションごとに更新。
 ### Gaps
 - ポート番号typo（5800 vs 8500）→ 注意力の問題
 - Consul の詳細な機能（KV store, ACL等）
+
+---
+
+## Traefik #devops #networking
+
+**Level: Beginner → Intermediate (進行中)**
+
+### Knows
+- Traefikがリバースプロキシであること
+- Consulタグベースルーティングの存在
+
+### Learned (2024-12-14)
+- **TLS終端**の概念（TraefikでHTTPS受けて、バックエンドにはHTTP転送）
+- Static config vs Dynamic config の違い
+- **File Provider**: Nomad外サービスをTraefikに教える静的設定
+- entryPoints: `web`=80, `websecure`=443
+- `certResolver: letsencrypt` でTLS証明書自動取得
+- traefik.nomad内でFile Provider設定がtemplate blockで書かれてる構造
+- ルーティング設定の書き方（rule, service, entryPoints, tls）
+
+### Gaps
+- Traefik middlewareの活用（redirect-to-https等）
+- 複雑なルーティングルール
+- Traefik dashboard の見方
 
 ---
 
@@ -209,13 +236,16 @@ Voidによる技術力評価。セッションごとに更新。
 - **YAGNIの判断ができる**: 「退避機能は使用頻度低い」と削った (2024-12-14)
 - **ギブアップを言える**: 無理なものは無理と正直に言える (2024-12-14)
 - **エラーから学べた**: `floating enable`必要と自分で理解 (2024-12-14)
+- **ヘルプを読んで自己修正**: `nomad job exec` → ヘルプ確認 → `run` を発見 (2024-12-14)
+- **段階的トラブルシュート**: ping → ポート確認 → HTTP vs HTTPS問題発見、と順序立てて調査できた (2024-12-14)
 
 ### Weaknesses
-- **エラーメッセージを読まない**: 最大の課題。情報は目の前にあるのに見てない
+- **エラーメッセージを読まない**: 最大の課題。情報は目の前にあるのに見てない → ただし改善の兆し！
 - **英語回避傾向**: ドキュメントに答えが書いてあっても読み飛ばす
 - **機密情報管理**: トークンの保存場所を忘れる。chezmoiでの管理方針が曖昧
 - **chezmoi apply忘れ**: 編集したけど反映されてなかった (2024-12-14)
 - **構文の細かいミス**: `head -1`, `2>&1` など (2024-12-14)
+- **ドキュメント鵜呑み問題**: CLAUDE.mdに「3000番」と書いてあったのを信じてた（実際は80番） (2024-12-14)
 
 ### Recommendations
 1. エラー出たら、まず全文読んでから行動
@@ -223,6 +253,7 @@ Voidによる技術力評価。セッションごとに更新。
 3. 機密情報は一元管理する場所を決める（Vault? パスワードマネージャー?）
 4. TASK.md / PLANNING.md を実態と同期させる習慣
 5. chezmoi編集後は `chezmoi apply` を習慣化する
+6. ドキュメントに書いてあっても実機で確認する習慣をつける
 
 ---
 
