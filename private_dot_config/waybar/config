@@ -2,26 +2,19 @@
     "layer": "top",
     "position": "top",
     "modules-left": ["sway/workspaces", "mpd", "sway/window"],
+    "modules-center": ["clock"],
     "modules-right": [
         "network",
         "pulseaudio",
-        "backlight",
         "temperature",
         "cpu",
         "memory",
-        "battery",
-        "clock"
     ],
     "pulseaudio": {
-        "format": "Volume: {volume}% {format_source}",
-        "format-bluetooth": "BT Volume: {volume}% {format_source}",
-        "format-bluetooth-muted": "BT Muted {format_source}",
-        "format-muted": "Muted {format_source}",
-        "format-source": "Mic: {volume}%",
-        "format-source-muted": "Mic: Muted",
-        "format-icons": {
-            "default": [""]
-        },
+        "format": "IF={volume}%",
+        "format-bluetooth": "BT={volume}%",
+        "format-muted": "IF: 0%",
+        "format-bluetooth-muted": "BT=0%",
         "on-click": "pavucontrol"
     },
     "backlight": {
@@ -39,33 +32,25 @@
         "format-icons": [""]
     },
     "network": {
-        "interval": 1,
-        "format": "Net: {ifname}",
-        "format-wifi": "WiFi: [Down {bandwidthDownBytes}] [Up {bandwidthUpBytes}]",
-        "format-ethernet": "Ethernet: [Down {bandwidthDownBytes}] [Up {bandwidthUpBytes}]",
-        "format-disconnected": "Disconnected",
-        "tooltip-format": "{ipaddr}",
-        "format-linked": "Linked: {ifname} (No IP)",
-        "tooltip-format-wifi": "{essid} Signal: {signalStrength}%",
-        "tooltip-format-ethernet": "Ethernet: {ifname}",
-        "tooltip-format-disconnected": "Disconnected",
-        "max-length": 30,
-        "format-icons": [""]
+        "format-wifi": "WiFi:{essid}",
+        "format-ethernet": "Ethernet",
+        "format-disconnected": "Disconnected"
     },
     "temperature": {
         "tooltip": false,
-        "format": "Temp: {temperatureC}°C",
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "format": "Temp={temperatureC}°C",
         "critical-threshold": 70,
         "interval": 1
     },
     "cpu": {
         "tooltip": false,
-        "format": "CPU: {:0.1f}%",
+        "format": "CPU={:0.1f}%",
         "interval": 1
     },
     "memory": {
         "tooltip": false,
-        "format": "Mem: {used:0.1f}/{total:0.1f} ({0}%)",
+        "format": "RAM={used:0.1f}/{total:0.1f}",
         "interval": 1
     },
     "disk": {
@@ -77,7 +62,7 @@
     },
     "clock": {
         "tooltip": false,
-        "format": "Time: {:%Y-%m-%d %H:%M:%S}",
+        "format": "{:%Y-%m-%d %a %H:%M:%S}",
         "interval": 1
     }
 }

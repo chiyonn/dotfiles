@@ -7,6 +7,7 @@
 window#waybar {
     background: #282828; /* dark0 */
     border: none;
+    margin: 0;
     padding: 0;
 }
 
