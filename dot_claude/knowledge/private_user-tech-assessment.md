@@ -117,6 +117,20 @@ DoH(`network.trr.mode`: 0=無効, 3=強制, 5=明示無効)、`about:networking#
 
 ---
 
+## LVM #linux #storage
+**Level: Intermediate**
+
+PV→VG→LV→FS→mount→fstab のフロー理解。`pvcreate`, `vgcreate`, `lvcreate` 操作可能。`vgmerge`/`vgrename` で VG 統合・リネーム。`lvextend -L +XXX` で拡張。`wipefs` でシグネチャ削除。複数 PV を1つの VG に統合するリスク（1台死亡で LV 道連れ）を理解した上で設計判断できる。
+
+**Learned (2025-12-15)**:
+- fdisk は GPT 対応済み、非推奨ではない
+- HDD 容量: マーケティング (10^9) vs OS表示 (2^30)
+- `lvextend -L 250G` vs `-L +250G` の違い
+
+**Gaps**: LV 縮小 (lvreduce)、スナップショット、thin provisioning
+
+---
+
 ## General Observations
 
 ### Strengths
@@ -124,9 +138,10 @@ DoH(`network.trr.mode`: 0=無効, 3=強制, 5=明示無効)、`about:networking#
 - 思考過程を言語化できる
 - YAGNI判断できる
 - ギブアップを言える
-- ヘルプ読んで自己修正
+- ヘルプ読んで自己修正（`--help | head` で構文確認する習慣）
 - 段階的トラブルシュート
 - 矛盾を指摘できる
+- リスク考慮してから設計判断（「壊れたらどうなる？」を先に聞ける）
 
 ### Weaknesses
 - **エラーメッセージ読まない**: 最大の課題（改善の兆しあり）
@@ -144,4 +159,4 @@ DoH(`network.trr.mode`: 0=無効, 3=強制, 5=明示無効)、`about:networking#
 
 ---
 
-*Last updated by Void*
+*Last updated by Void: 2025-12-15*
