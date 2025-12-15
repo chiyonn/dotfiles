@@ -71,3 +71,14 @@ task() {
 
   return $result
 }
+
+timer() {
+  [[ -z $1 ]] && { echo "Invalid arguments: timer [int]"; return 1;}
+  local sound="/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"
+  [[ -f $sound ]] || { echo "No such file: $sound"; return 1; }
+  (sleep $1m && notify-send "timer" && paplay $sound) & disown
+}
+
+again() {
+  eval "$(history | peco | sed -E 's/^\s+[0-9]+\s+//')"
+}
