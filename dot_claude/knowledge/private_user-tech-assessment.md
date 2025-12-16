@@ -32,7 +32,11 @@ Query Log確認、`@@||domain^$important`で許可、API経由確認できる。
 
 systemctl基本(start/stop/status)、systemd-resolvedの存在は知ってる。
 
-**Gaps**: unitファイル、journalctl
+**Learned (2025-12-16)**:
+- `journalctl -b -1` で前回ブートのログ確認
+- `-b` に負の数を渡して過去ブート指定
+
+**Gaps**: unitファイル、journalctl詳細オプション（--since, --until, -u など）
 
 ---
 
@@ -90,12 +94,16 @@ xdg-desktop-portal-wlr、縦置きモニター画面共有問題、OBS仮想カ�
 
 ---
 
-## Package Management #linux #fedora
+## Package Management #linux #fedora #debian
 **Level: Intermediate**
 
 dnf基本、RPM Fusion、akmod。**`ffmpeg-free` vs `ffmpeg`**（パテント制限）を理解。`--allowerasing`でパッケージ置換。Firefoxはシステムコーデック依存、Braveは自前。
 
-**Gaps**: dnf詳細オプション、rpm直接操作
+**Learned (2025-12-16)**:
+- `dpkg -l` のステータス文字: `ii`=installed, `rc`=removed but config remains
+- `apt remove` vs `apt purge` の違い
+
+**Gaps**: dnf詳細オプション、rpm直接操作、dpkg詳細
 
 ---
 
@@ -131,6 +139,20 @@ PV→VG→LV→FS→mount→fstab のフロー理解。`pvcreate`, `vgcreate`, `
 
 ---
 
+## NetworkManager #linux #networking
+**Level: Beginner**
+
+`nmcli device status` でデバイス状態確認。NetworkManager への移行は実施済み。
+
+**Learned (2025-12-16)**:
+- ifupdown との共存は危険（両方が同じ NIC を管理しようとして競合）
+- 移行時は古いネットワーク管理システムを完全に無効化/削除すべき
+- dhclient が裏で動いてると DHCP リクエストが競合する
+
+**Gaps**: nmcli 詳細操作、connection profile 管理、VPN 設定
+
+---
+
 ## General Observations
 
 ### Strengths
@@ -159,4 +181,4 @@ PV→VG→LV→FS→mount→fstab のフロー理解。`pvcreate`, `vgcreate`, `
 
 ---
 
-*Last updated by Void: 2025-12-15*
+*Last updated by Void: 2025-12-16*
