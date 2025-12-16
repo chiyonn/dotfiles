@@ -18,7 +18,10 @@
     bindsym $mod+Shift+7 move container to workspace number 7
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+
+    # for prevent to send window to workspace 0 accidentally
+    # workspace 0 is now only for wl-mirror
+    #bindsym $mod+Shift+0 move container to workspace number 10
 
     bindsym $mod+Tab workspace back_and_forth
     bindsym $mod+p workspace prev_on_output
