@@ -80,5 +80,5 @@ timer() {
 }
 
 again() {
-  eval "$(history | peco | sed -E 's/^\s+[0-9]+\s+//')"
+  eval "$(history | tac | peco | sed -E 's/^\s+[0-9]+\s+//')"
 }
