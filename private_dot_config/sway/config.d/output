@@ -1,14 +1,15 @@
 # background color (gruvbox dark)
-output * bg #282828 solid_color
+output * bg #000000 solid_color
 
 # display placement
 # output eDP-1 scale 1.25 pos 4320 720 res 2560x1440
-output DP-3
-workspace 0 output HDMI-A-1
+output DP-3 pos 0 1000
+output HDMI-A-1 pos 3840 0 transform 90
 
-for_window [app_id="at.yrlf.wl_mirror"] {
-    move to workspace 0
-    fullscreen enable
-}
-
-exec wl-mirror DP-3
+## mirroring
+# workspace 0 output HDMI-A-1
+# for_window [app_id="at.yrlf.wl_mirror"] {
+#     move to workspace 0
+#     fullscreen enable
+# }
+# exec wl-mirror DP-3
