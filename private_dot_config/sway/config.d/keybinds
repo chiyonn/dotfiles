@@ -17,7 +17,7 @@
     #       $mod+p binded to move to previous workspace
     #       $mod+q none
     #       $mod+r none
-    #       $mod+s none
+    bindsym $mod+s exec grim -g "$(slurp)" - | wl-copy
     #       $mod+t none
     bindsym $mod+u exec $browser "https://claude.ai/new?incognito"
     bindsym $mod+v split toggle
