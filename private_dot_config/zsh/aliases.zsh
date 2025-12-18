@@ -27,9 +27,6 @@ alias precom='bin/rails assets:precompile'
 # App aliases
 alias v=nvim
 alias cz=chezmoi
-alias gocz='cd ~/.local/share/chezmoi'
-alias edit='chezmoi managed | peco | xargs -I {} chezmoi edit --apply "{}"'
-
 
 # Tmux aliases
 alias t=tmux

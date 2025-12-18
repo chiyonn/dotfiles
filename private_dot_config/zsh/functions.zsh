@@ -82,3 +82,9 @@ timer() {
 again() {
   eval "$(history | tac | peco | sed -E 's/^\s+[0-9]+\s+//')"
 }
+
+edit() {
+  cd $(chezmoi source-path)
+  chezmoi managed | peco | xargs -I {} chezmoi edit --apply '~/{}'
+  cd - > /dev/null
+}
