@@ -1,20 +1,27 @@
 #!/bin/bash
 
-# Check for connected Bluetooth devices without audio sink
+# Check for connected Bluetooth audio devices without a2dp-sink
 check_bluetooth_sink() {
-    local bt_devices
-    bt_devices=$(bluetoothctl devices Connected 2>/dev/null)
-    [[ -z "$bt_devices" ]] && return
+    local cards
+    cards=$(pactl list cards 2>/dev/null)
+    [[ -z "$cards" ]] && return
 
-    while read -r _ mac name; do
-        [[ -z "$mac" ]] && continue
-        local card_name="bluez_card.${mac//:/_}"
+    # Extract bluez card names (only audio devices appear here)
+    local bluez_cards
+    bluez_cards=$(echo "$cards" | grep -oE 'bluez_card\.[0-9A-F_]+')
+    [[ -z "$bluez_cards" ]] && return
+
+    while read -r card_name; do
+        [[ -z "$card_name" ]] && continue
 
         # Check if device has a2dp-sink profile available
-        if ! pactl list cards 2>/dev/null | grep -A 30 "$card_name" | grep -q "a2dp-sink\|a2dp_sink"; then
-            notify-send -u critical "Bluetooth Audio" "$name: A2DPプロファイルなし\nbluetooth.service再起動で直るかも" 2>/dev/null
+        if ! echo "$cards" | grep -A 30 "$card_name" | grep -q "a2dp-sink\|a2dp_sink"; then
+            local device_name
+            device_name=$(echo "$cards" | grep -A 15 "$card_name" | grep "device.description" | sed 's/.*= "\(.*\)"/\1/')
+            [[ -z "$device_name" ]] && device_name="$card_name"
+            notify-send -u critical "Bluetooth Audio" "$device_name: No A2DP profile\nTry restarting bluetooth.service" 2>/dev/null
         fi
-    done <<< "$bt_devices"
+    done <<< "$bluez_cards"
 }
 
 check_bluetooth_sink
