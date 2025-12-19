@@ -29,6 +29,16 @@ mac=$(echo "$selected" | grep -oE '[0-9A-F:]{17}')
 
 if [[ "$action" == "connect" ]]; then
     bluetoothctl connect "$mac"
+
+    # Wait for bluez card to appear, then set A2DP profile
+    card_name="bluez_card.${mac//:/_}"
+    for i in {1..10}; do
+        if pactl list cards short | grep -q "$card_name"; then
+            pactl set-card-profile "$card_name" a2dp-sink 2>/dev/null
+            break
+        fi
+        sleep 0.5
+    done
 else
     bluetoothctl disconnect "$mac"
 fi
