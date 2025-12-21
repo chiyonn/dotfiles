@@ -43,3 +43,22 @@ echo "Remember to set environment variables in your shell config:"
 echo "  export GTK_IM_MODULE=fcitx"
 echo "  export QT_IM_MODULE=fcitx"
 echo "  export XMODIFIERS=@im=fcitx"
+
+# Download mozc-common-user-dict for better conversion
+DICT_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/mozc-dicts"
+REPO_URL="https://raw.githubusercontent.com/reasonset/mozc-common-user-dict/main"
+
+echo ""
+echo "Downloading mozc-common-user-dict..."
+mkdir -p "$DICT_DIR/proper"
+
+for file in common.txt sentence.txt proper/events.txt proper/services.txt; do
+    curl -fsSL "$REPO_URL/$file" -o "$DICT_DIR/$file" 2>/dev/null || true
+done
+
+echo "Dictionary files saved to: $DICT_DIR"
+echo ""
+echo "=== MANUAL STEP REQUIRED ==="
+echo "To import dictionaries, run:"
+echo "  /usr/libexec/fcitx5-mozc/mozc_tool --mode=dictionary_tool"
+echo "Then: 管理 → 新規辞書にインポート → select files from $DICT_DIR"
