@@ -1,0 +1,10 @@
+# Taskwarrior configuration
+
+# Sync server
+sync.server.url=http://task.voxon.monster
+
+# Secrets (machine-specific, not managed by chezmoi)
+include ~/.taskrc_secret
+
+# Basic settings
+news.version=3.4.0
