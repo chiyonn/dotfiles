@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=REAPER Guitar Sessions
+Comment=Open existing REAPER session
+Exec=/home/chiyonn/.config/sway/scripts/launch_guitar_reaper.sh
+Terminal=false
+Type=Application
+
