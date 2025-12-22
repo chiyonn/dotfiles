@@ -7,3 +7,22 @@ README.md
 
 # Secret environment variables (managed locally per machine)
 .zshenv
+
+# Powerlevel10k configuration (prefer to keep current settings)
+.p10k.zsh
+
+{{- if eq .chezmoi.os "darwin" }}
+# Linux-specific configurations (ignored on macOS)
+.config/dunst
+.config/fcitx5
+.config/foot
+.config/sway
+.config/waybar
+.config/wofi
+.local/share/applications/mozc-word-register.desktop
+.local/share/applications/reaper-sessions.desktop
+.local/share/applications/sway_scratchpad.desktop
+install-docker-for-fedora.sh
+install-fcitx5-mozc.sh
+install-hack-nerd-font.sh
+{{- end }}

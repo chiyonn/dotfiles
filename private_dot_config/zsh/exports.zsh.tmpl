@@ -9,16 +9,24 @@ export LANG=en_US.UTF-8
 # Path additions
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Private/callot/bin:$PATH"
+{{- if eq .chezmoi.os "linux" }}
 export PATH="$HOME/.config/sway/scripts:$PATH"
+{{- end }}
 
 # ZK notebook directory
+{{- if eq .chezmoi.os "darwin" }}
+export ZK_NOTEBOOK_DIR="/Volumes/notes"
+{{- else }}
 export ZK_NOTEBOOK_DIR="/home/chiyonn/Documents/notes"
+{{- end }}
 
-# Input Method
+{{- if eq .chezmoi.os "linux" }}
+# Input Method (Linux only)
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
+{{- end }}
 
+# Homelab (secrets should be in ~/.zshenv)
 export NOMAD_ADDR=http://192.168.40.104:4646
-export NOMAD_TOKEN=$(<~/.nomad_token)
 
