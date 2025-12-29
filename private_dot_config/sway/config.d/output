@@ -3,8 +3,8 @@ output * bg #000000 solid_color
 
 # display placement
 # output eDP-1 scale 1.25 pos 4320 720 res 2560x1440
-output DP-3 pos 0 1000
-output HDMI-A-1 pos 3840 0 transform 90
+output DP-3 pos 0 0 transform 180
+output HDMI-A-1 pos -3840 0
 
 ## mirroring
 # workspace 0 output HDMI-A-1
