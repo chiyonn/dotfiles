@@ -23,7 +23,7 @@
     bindsym $mod+v split toggle
     #       $mod+w none
     #       $mod+x none
-    #       $mod+y none
+    bindsym $mod+y exec $browser "https://youtube.com"
     #       $mod+z none
 
     bindsym $mod+Return exec $term
