@@ -7,6 +7,6 @@ song=$(printf "$medias" | wofi --dmenu --prompt "Songs")
 
 [[ -z "$song" ]] && exit 0
 
-reaper -nosplash "$REAPER_MEDIA_DIR$song" &
+/opt/REAPER/reaper "$REAPER_MEDIA_DIR$song" &
 
 notify-send "Guitar Practice" "Starting: $song"
