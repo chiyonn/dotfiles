@@ -11,7 +11,7 @@
     #       $mod+j binded to window focus down
     #       $mod+k binded to window focus up
     #       $mod+l binded to window focus right
-    #       $mod+m binded to music mode
+    bindsym $mod+m exec $HOME/.config/sway/scripts/launch_guitar_reaper.sh
     #       $mod+n binded to move to next workspace
     bindsym $mod+o exec $browser
     #       $mod+p binded to move to previous workspace

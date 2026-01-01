@@ -11,7 +11,7 @@ set $right l
 set $term foot
 set $filer nautilus
 set $browser firefox
-set $menu wofi | grep -v '^$' | xargs swaymsg exec --
+set $menu wofi --show drun
 
 # short handlers
 set $scratchpad_call ~/.config/sway/scripts/scratchpad_firefox.sh
@@ -58,6 +58,7 @@ bar {
 
 for_window [app_id="blueman-manager"] floating enable, border pixel 2
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, border pixel 2
+
 
 include /etc/sway/config.d/*
 include $HOME/.config/sway/config.d/*
