@@ -8,9 +8,6 @@ README.md
 # Secret environment variables (managed locally per machine)
 .zshenv
 
-# Powerlevel10k configuration (prefer to keep current settings)
-.p10k.zsh
-
 {{- if eq .chezmoi.os "darwin" }}
 # Linux-specific configurations (ignored on macOS)
 .config/dunst
