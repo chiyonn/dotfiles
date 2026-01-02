@@ -71,8 +71,3 @@
 # function keys
     bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-
-# corne cherry v4
-    bindsym XF86AudioPlay exec playerctl play-pause
-    bindsym XF86AudioNext exec playerctl next
-    bindsym XF86AudioPrev exec playerctl previous
