@@ -5,5 +5,18 @@
     "linear@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
     "serena@claude-plugins-official": true
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send 'Claude Code' 'Your action is needed' && paplay /usr/share/sounds/freedesktop/stereo/message.oga"
+          }
+        ]
+      }
+    ]
   }
 }
