@@ -1,5 +1,5 @@
-# background color (gruvbox dark)
-output * bg #000000 solid_color
+# background
+output * bg /usr/share/backgrounds/dream_board.png fill
 
 # display placement
 # output eDP-1 scale 1.25 pos 4320 720 res 2560x1440
