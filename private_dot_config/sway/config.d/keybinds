@@ -50,7 +50,7 @@
     bindsym $mod+Shift+p sticky
     bindsym $mod+Shift+q kill
     #       $mod+Shift+r none
-    bindsym $mod+Shift+s exec grim -g "$(slurp)" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png
+    bindsym $mod+Shift+s exec mkdir -p ~/Pictures/screenshots && grim -g "$(slurp)" ~/Pictures/screenshots/$(date +%Y%m%d-%H%M%S).png
     #       $mod+Shift+t none
     #       $mod+Shift+u none
     #       $mod+Shift+v none
