@@ -8,5 +8,5 @@ uv = "latest"
 idiomatic_version_file_enable_tools = ["ruby"]
 
 [env]
-GOBIN = "~/.local/bin"
+GOBIN = "{{env.HOME}}/.local/bin"
 
