@@ -41,7 +41,7 @@ alias tile='aerospace layout tiles'
 alias qbuild='curl -X POST $NOMAD_ADDR/v1/job/quartz-builder/dispatch -H "X-Nomad-Token: $NOMAD_TOKEN" -d "{}"'
 
 # tree
-alias tree='tree -I "node_modules|__pycache__"'
+alias tree='tree -I node_modules -I __pycache__'
 
 # System aliases
 # alias reboot='systemctl soft-reboot'
