@@ -17,12 +17,14 @@ Issue作業完了後のクリーンアップを自動化する。`issue-worktree
 2. リモート(origin/main)にpush
 3. worktree削除
 4. ブランチ削除
-5. Issueクローズ
+5. 通信フォルダ削除
+6. Issueクローズ
 
 ## Naming Convention (issue-worktreeと同じ)
 
 - **Branch**: `feat_{number}-{description}`
 - **Worktree**: `../{repo_name}-{number}`
+- **通信フォルダ**: `.claude/workers/{number}/`
 
 ## Workflow
 
@@ -70,7 +72,14 @@ git worktree remove ../{REPO_NAME}-{NUMBER}
 git branch -d feat_{NUMBER}-{DESCRIPTION}
 ```
 
-### Step 6: Issueクローズ
+### Step 6: 通信フォルダ削除
+
+```bash
+# 通信フォルダが存在すれば削除
+rm -rf .claude/workers/{NUMBER}
+```
+
+### Step 7: Issueクローズ
 
 ```bash
 gh issue close {NUMBER} --reason completed
@@ -98,7 +107,10 @@ git worktree remove ../swarmyard-19
 # 5. ブランチ削除
 git branch -d feat_19-db-migration-automation
 
-# 6. Issueクローズ
+# 6. 通信フォルダ削除
+rm -rf .claude/workers/19
+
+# 7. Issueクローズ
 gh issue close 19 --reason completed
 ```
 
@@ -107,4 +119,5 @@ gh issue close 19 --reason completed
 - マージ前にmainブランチにいることを確認する
 - コンフリクトが発生した場合は手動解決が必要
 - worktreeが存在しない場合はスキップ可能
+- 通信フォルダが存在しない場合もスキップ可能
 - Issueが既にクローズ済みの場合はエラーになるが無視してOK
