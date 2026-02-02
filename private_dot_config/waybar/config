@@ -40,7 +40,7 @@
         "tooltip": false,
         "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
         "format": "Temp={temperatureC}°C",
-        "critical-threshold": 70,
+        "critical-threshold": 85,
         "interval": 1
     },
     "cpu": {
