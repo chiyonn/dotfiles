@@ -94,12 +94,17 @@ summary: 起動中
 EOF
 ```
 
-### Step 5.5: workerから通信フォルダへのシンボリックリンク作成
+### Step 5.5: workerから通信フォルダ・設定へのシンボリックリンク作成
 
 ```bash
 # workerは相対パス .claude/workers/ を使うので、メインリポジトリへリンク
 mkdir -p "$WORKTREE_PATH/.claude"
 ln -s "$PROJECT_ROOT/.claude/workers" "$WORKTREE_PATH/.claude/workers"
+
+# settings.local.json をシンボリックリンク（許可設定を継承）
+# 既存ファイルがあれば削除してからリンク
+rm -f "$WORKTREE_PATH/.claude/settings.local.json"
+ln -s "$PROJECT_ROOT/.claude/settings.local.json" "$WORKTREE_PATH/.claude/settings.local.json"
 ```
 
 ### Step 6: tmuxウィンドウ作成
@@ -121,129 +126,36 @@ tmux send-keys -t "$SESSION:{NUMBER}" Enter
 ### Step 8: Claude起動とIssue内容 + Worker Protocol送信
 
 ```bash
-# claudeを起動
-tmux send-keys -t "$SESSION:{NUMBER}" 'claude'
+# claudeを起動（--allowedToolsで開発系コマンドを許可）
+ALLOWED_TOOLS='Edit Write "Bash(git:*)" "Bash(make:*)" "Bash(go:*)" "Bash(golangci-lint:*)" "Bash(yarn:*)" "Bash(docker:*)" "Bash(docker-compose:*)" "Bash(gh:*)"'
+tmux send-keys -t "$SESSION:{NUMBER}" "claude --allowedTools $ALLOWED_TOOLS"
 tmux send-keys -t "$SESSION:{NUMBER}" Enter
 
-# 少し待ってからIssue内容を送信（claudeの起動を待つ）
+# 少し待ってからセキュリティガイド同意を処理（初回起動時のみ表示されるが、空振りしても問題ない）
 sleep 2
+tmux send-keys -t "$SESSION:{NUMBER}" Enter
+
+# さらに少し待ってからIssue内容を送信
+sleep 1
 
 # Issue内容 + Worker Protocolを送信
+# Worker Protocolは外部ファイルから読み込む
+SKILL_DIR="$HOME/.claude/skills/issue-worktree"
+WORKER_PROTOCOL=$(cat "$SKILL_DIR/worker-protocol.md")
+
+ISSUE_WITH_PROTOCOL="# Issue #${NUMBER}: ${TITLE}
+
+${ISSUE_BODY}
+
+---
+
+${WORKER_PROTOCOL}"
+
 tmux send-keys -t "$SESSION:{NUMBER}" "$ISSUE_WITH_PROTOCOL"
 tmux send-keys -t "$SESSION:{NUMBER}" Enter
 ```
 
-**送信する内容 ($ISSUE_WITH_PROTOCOL):**
-
-```markdown
-# Issue #{NUMBER}: {TITLE}
-
-{ISSUE_BODY}
-
----
-
-## Worker Protocol
-
-あなたは自律的に動作するWorkerです。実装からレビュー、修正まで自己完結してください。
-
-### 進捗報告
-作業の節目で `.claude/workers/{NUMBER}/status.md` を更新してください:
-
-- status: `in_progress` | `in_review` | `completed`
-- summary: 現在何をしているか1行で
-- Progress: チェックリスト形式で進捗を記録
-- Blockers: 自力で解決できない問題があれば記載
-
-### 実装フロー
-
-1. Issue内容を確認し、status を `in_progress` に更新
-2. 実装を進める（テストも書く）
-3. 実装完了したらコミット
-4. レビューフローへ
-
-### レビューフロー
-
-実装が完了したら、**Taskツール**を使ってレビューエージェントを起動し、フィードバックを受けてください。
-
-1. status を `in_review` に更新
-2. Taskツールでレビューエージェントを起動:
-
-```
-Task tool parameters:
-- subagent_type: "general-purpose"
-- description: "Review Issue #{NUMBER} changes"
-- prompt: 以下の内容を渡す
-```
-
-**レビューエージェントへのプロンプト:**
-
-~~~
-# Code Review Request
-
-Issue #{NUMBER}: {TITLE}
-
-## Issue要件
-{ISSUE_BODYの要約}
-
-## レビュー対象
-`git diff main..HEAD` の内容をレビューしてください。
-
-## レビュー観点
-
-### Must Check
-- [ ] Issue要件がすべて実装されているか
-- [ ] スコープクリープ（要求されていない機能の追加）がないか
-- [ ] エラーハンドリングは適切か
-- [ ] テストは追加されているか
-
-### Code Quality
-- [ ] 命名は意図を正確に表しているか
-- [ ] 関数の責務は単一か
-- [ ] マジックナンバー/ストリングがないか
-- [ ] 不要なコードが残っていないか
-
-### Security
-- [ ] ユーザー入力のバリデーション
-- [ ] 機密情報がログに出力されていないか
-
-### Architecture
-- [ ] プロジェクトの既存パターンに従っているか
-- [ ] YAGNI/KISS原則に反していないか
-
-## 出力形式
-
-```markdown
-## Summary
-[1-2文で全体評価]
-
-## Must Fix
-- [ ] [修正必須の問題]
-
-## Should Fix
-- [ ] [推奨される修正]
-
-## Verdict
-[ ] Approved - マージ可能
-[ ] Request Changes - 修正が必要
-```
-~~~
-
-3. レビュー結果を受け取る
-4. **Request Changes** の場合:
-   - 指摘事項を修正
-   - 再コミット
-   - 再度レビューエージェントを起動（ループ）
-5. **Approved** の場合:
-   - status を `completed` に更新
-   - 作業完了
-
-### ブロック時
-
-自力で解決できない問題が発生したら:
-1. status.md の Blockers セクションに詳細を記載
-2. 可能な範囲で調査を続ける
-3. どうしても無理なら作業を中断（Orchestratorが後で確認する）
-```
+**Worker Protocol:** `worker-protocol.md` を参照（再利用可能）
 
 ## Complete Example
 
@@ -268,18 +180,54 @@ tmux new-window -t swarmyard -n 4 -c /path/to/swarmyard-4
 tmux send-keys -t swarmyard:4 'mise trust'
 tmux send-keys -t swarmyard:4 Enter
 
-# 6. claude起動してIssue内容 + Worker Protocolを渡す
-tmux send-keys -t swarmyard:4 'claude'
+# 6. claude起動してIssue内容 + Worker Protocolを渡す（--allowedToolsで開発系コマンド許可）
+ALLOWED_TOOLS='Edit Write "Bash(git:*)" "Bash(make:*)" "Bash(go:*)" "Bash(golangci-lint:*)" "Bash(yarn:*)" "Bash(docker:*)" "Bash(docker-compose:*)" "Bash(gh:*)"'
+tmux send-keys -t swarmyard:4 "claude --allowedTools $ALLOWED_TOOLS"
 tmux send-keys -t swarmyard:4 Enter
 sleep 2
+tmux send-keys -t swarmyard:4 Enter  # セキュリティガイド同意（空振りOK）
+sleep 1
 tmux send-keys -t swarmyard:4 "$ISSUE_WITH_PROTOCOL"
 tmux send-keys -t swarmyard:4 Enter
 ```
 
+## Error Handling
+
+### Issue番号が存在しない場合
+```bash
+# gh issue viewが失敗した場合
+if ! gh issue view {NUMBER} --json number,title 2>/dev/null; then
+  echo "Error: Issue #{NUMBER} が見つかりません"
+  exit 1
+fi
+```
+
+### ブランチが既に存在する場合
+```bash
+# ブランチの存在チェック
+if git rev-parse --verify "feat_{NUMBER}-{DESCRIPTION}" 2>/dev/null; then
+  echo "Error: ブランチ feat_{NUMBER}-{DESCRIPTION} は既に存在します"
+  echo "削除するには: git branch -D feat_{NUMBER}-{DESCRIPTION}"
+  exit 1
+fi
+```
+
+### worktreeが既に存在する場合
+```bash
+# worktreeの存在チェック
+WORKTREE_PATH="../{REPO_NAME}-{NUMBER}"
+if [ -d "$WORKTREE_PATH" ]; then
+  echo "Error: worktree $WORKTREE_PATH は既に存在します"
+  echo "削除するには: git worktree remove $WORKTREE_PATH"
+  exit 1
+fi
+```
+
+**推奨**: 上記エラーが発生した場合は、`/issue-finish {NUMBER}` または `/git-branch-cleanup` で既存リソースをクリーンアップしてから再実行。
+
 ## Notes
 
-- 既にブランチやworktreeが存在する場合はエラーになる
-- 削除は `git-branch-cleanup` skillを使用
-- worktree一覧は `git worktree list` で確認
 - **IMPORTANT**: `tmux send-keys`でclaudeに送信する際は、文章とEnterを必ず2回に分けて送信すること（1回で送ると正しく動作しない）
 - 通信フォルダは `.claude/workers/{NUMBER}/` に作成される（.gitignore推奨）
+- worktree一覧は `git worktree list` で確認
+- Worker Protocolは `worker-protocol.md` に外部ファイル化されており、再利用可能

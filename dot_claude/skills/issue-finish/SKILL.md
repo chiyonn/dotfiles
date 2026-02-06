@@ -114,10 +114,65 @@ rm -rf .claude/workers/19
 gh issue close 19 --reason completed
 ```
 
+## Error Handling
+
+### ブランチが存在しない場合
+```bash
+# ブランチの存在チェック
+BRANCH_NAME="feat_{NUMBER}-{DESCRIPTION}"
+if ! git rev-parse --verify "$BRANCH_NAME" 2>/dev/null; then
+  echo "Warning: ブランチ $BRANCH_NAME が見つかりません（既に削除済み？）"
+  echo "スキップして続行します..."
+fi
+```
+
+### worktreeが存在しない場合
+```bash
+# worktreeの存在チェック
+WORKTREE_PATH="../{REPO_NAME}-{NUMBER}"
+if ! git worktree list | grep -q "$WORKTREE_PATH"; then
+  echo "Warning: worktree $WORKTREE_PATH が見つかりません（既に削除済み？）"
+  echo "スキップして続行します..."
+fi
+```
+
+### マージコンフリクトの解決手順
+
+```bash
+# コンフリクトが発生した場合
+git merge feat_{NUMBER}-{DESCRIPTION} --no-edit
+# -> CONFLICT (content): Merge conflict in ...
+
+# 1. コンフリクトファイルの確認
+git status
+
+# 2. エディタでコンフリクトマーカーを解決
+# <<<<<<< HEAD
+# =======
+# >>>>>>> feat_{NUMBER}-{DESCRIPTION}
+
+# 3. 解決後、ファイルをステージング
+git add <resolved-files>
+
+# 4. マージコミット作成
+git commit --no-edit
+# または手動メッセージ: git commit -m "Merge feat_{NUMBER}-{DESCRIPTION}"
+
+# 5. マージが成功したことを確認
+git log --oneline -1
+```
+
+**重要**: コンフリクト解決時は、どちらの変更を採用するか慎重に判断すること。不明な場合はIssueの担当者に確認。
+
+### Issueが既にクローズ済みの場合
+```bash
+# エラーは無視してOK
+gh issue close {NUMBER} --reason completed 2>&1 | grep -v "already closed" || true
+```
+
 ## Notes
 
 - マージ前にmainブランチにいることを確認する
-- コンフリクトが発生した場合は手動解決が必要
-- worktreeが存在しない場合はスキップ可能
-- 通信フォルダが存在しない場合もスキップ可能
-- Issueが既にクローズ済みの場合はエラーになるが無視してOK
+- worktreeやブランチが存在しない場合は警告を出してスキップ
+- 通信フォルダが存在しない場合も自動的にスキップされる
+- 部分的な実行も可能（例: pushだけ、Issueクローズだけ）
