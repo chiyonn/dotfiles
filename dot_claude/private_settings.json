@@ -35,5 +35,9 @@
     "pyright-lsp@claude-plugins-official": true
   },
   "language": "日本語",
-  "effortLevel": "medium"
+  "effortLevel": "medium",
+  "statusLine": {
+    "type": "command",
+    "command": "/home/chiyonn/.claude/statusline.sh"
+  }
 }
