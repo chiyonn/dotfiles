@@ -38,6 +38,6 @@
   "effortLevel": "medium",
   "statusLine": {
     "type": "command",
-    "command": "/home/chiyonn/.claude/statusline.sh"
+    "command": "npx -y @owloops/claude-powerline@latest --style=powerline --theme=tokyo-night"
   }
 }
