@@ -1,0 +1,54 @@
+target_dir: ~/Downloads
+
+rules:
+  # === 自動削除 ===
+  - name: delete_tasmate_dumps
+    match:
+      pattern: "tasmate-*.dump"
+    action: delete
+
+  - name: delete_reaper_installers
+    match:
+      pattern: "reaper*_linux_x86_64*"
+    action: delete
+    include_dirs: true
+
+  - name: delete_guitar_tabs
+    match:
+      pattern: "*Songsterr*"
+    action: delete
+    include_dirs: true
+
+  - name: delete_guitar_reference_html
+    match:
+      pattern: "*{diatonic_chords,seventh_chords,fretboard_notes}*"
+    action: delete
+
+  - name: delete_finance
+    match:
+      pattern: "*{baibai,デビットカード}*"
+    action: delete
+
+  # === 自動移動 ===
+  - name: images_to_pictures
+    match:
+      extension: [".png", ".jpg", ".jpeg", ".gif", ".webp"]
+    action: move
+    destination: ~/Pictures
+
+  # === LLM推測+確認 ===
+  - name: mp3_to_reaper_reference
+    match:
+      extension: [".mp3"]
+    action: move_and_rename
+    destination: ~/Documents/REAPER Media/reference
+    rename_format: "{artist} - {song}.mp3"
+    rename_strategy: llm_infer_and_confirm
+
+  # === 毎回確認 ===
+  - name: ask_for_videos
+    match:
+      extension: [".mp4", ".mkv", ".avi", ".webm"]
+    action: ask
+
+unmatched_policy: ask
