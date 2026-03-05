@@ -15,6 +15,10 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y @owloops/claude-powerline@latest --style=powerline --theme=gruvbox"
+  },
   "enabledPlugins": {
     "context7@claude-plugins-official": true,
     "github@claude-plugins-official": true,
@@ -35,9 +39,5 @@
     "pyright-lsp@claude-plugins-official": true
   },
   "language": "日本語",
-  "effortLevel": "medium",
-  "statusLine": {
-    "type": "command",
-    "command": "npx -y @owloops/claude-powerline@latest --style=powerline --theme=gruvbox"
-  }
+  "effortLevel": "medium"
 }
