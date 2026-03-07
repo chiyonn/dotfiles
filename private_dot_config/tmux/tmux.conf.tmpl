@@ -31,3 +31,7 @@ bind-key e choose-tree -s
 bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded!"
 
 unbind space
+
+# Extended keys (Shift+Enter etc.) for Claude Code / kitty protocol
+set -s extended-keys always
+set -as terminal-features 'foot:extkeys'

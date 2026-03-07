@@ -8,3 +8,8 @@
 @~/.claude/prompts/role/mindset-nudger.md
 
 {{ end -}}
+## Chezmoi
+- dotfile（`~/.config/`、`~/.claude/`配下など）を編集する前に、chezmoi管理下かチェックすること
+  - `chezmoi managed <ファイルパス>` で確認可能
+  - 管理下の場合は `~/.local/share/chezmoi` 内の対応するsourceファイルを編集すること
+  - 直接ホームディレクトリのファイルを編集すると `chezmoi apply` で上書きされる
