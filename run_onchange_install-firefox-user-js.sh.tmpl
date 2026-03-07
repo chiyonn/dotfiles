@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Deploy user.js to active Firefox profile
+# Trigger: {{ include "private_dot_config/firefox/user.js" | sha256sum }}
+
+set -euo pipefail
+
+SOURCE="$HOME/.config/firefox/user.js"
+PROFILE_DIR="$HOME/.mozilla/firefox"
+
+if [ ! -f "$SOURCE" ]; then
+    echo "Error: $SOURCE not found"
+    exit 1
+fi
+
+# Find active default-release profile (most recently used)
+PROFILE=$(find "$PROFILE_DIR" -maxdepth 1 -name "*.default-release*" -type d -printf '%T@ %p\n' 2>/dev/null | sort -rn | head -1 | cut -d' ' -f2-)
+
+if [ -z "$PROFILE" ]; then
+    echo "No Firefox default-release profile found, skipping"
+    exit 0
+fi
+
+cp "$SOURCE" "$PROFILE/user.js"
+echo "Deployed user.js to $PROFILE"
+echo "Restart Firefox to apply changes."
