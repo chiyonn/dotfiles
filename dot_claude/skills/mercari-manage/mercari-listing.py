@@ -11,7 +11,7 @@ Usage:
     # 事前にブラウザを起動してログイン状態にしておく
     # npx @playwright/cli open --browser firefox --headed
     # npx @playwright/cli state-load mercari
-    python3 -u ~/.claude/skills/mercari-cleanup/mercari-listing.py
+    python3 -u ~/.claude/skills/mercari-manage/mercari-listing.py
 """
 
 import csv
@@ -27,7 +27,7 @@ from dataclasses import dataclass
 
 SPREADSHEET_ID = "1ob4criiPkC-MItr9T08sKFuDVcxmA4NHNbAO2juOxvw"
 CSV_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/export?format=csv&gid=0"
-ASSETS_DIR = os.path.expanduser("~/.claude/skills/mercari-cleanup/assets")
+ASSETS_DIR = os.path.expanduser("~/.claude/skills/mercari-manage/assets")
 # Playwright CLIはCWDをallowed rootにする。CWD配下にsymlinkを作る。
 ASSETS_SYMLINK_NAME = ".mercari-assets"
 
