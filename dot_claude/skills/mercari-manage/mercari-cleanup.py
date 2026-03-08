@@ -4,14 +4,11 @@
 更新日が2週間以上前の出品商品を自動削除する。
 Playwright CLI のセッションが起動済み＆ログイン済みであることが前提。
 
-重要: eval コマンドは page.evaluate() (ブラウザJS) にマッピングされるため
-Playwright API は使えない。すべて snapshot → ref → CLI コマンドで操作する。
-
 Usage:
     # 事前にブラウザを起動してログイン状態にしておく
     # npx @playwright/cli open --browser firefox --headed
     # npx @playwright/cli state-load mercari
-    python3 -u ~/.claude/skills/mercari-manage/mercari-cleanup.py
+    python3 ~/.claude/skills/mercari-manage/mercari-cleanup.py
 """
 
 import glob
@@ -21,67 +18,68 @@ import sys
 import time
 
 
-def run_cli(*args: str, timeout: int = 30) -> tuple[bool, str]:
-    result = subprocess.run(
-        ["npx", "@playwright/cli", *args],
-        capture_output=True,
-        text=True,
-        timeout=timeout,
-    )
-    output = result.stdout + result.stderr
-    has_error = result.returncode != 0 or "### Error" in output
-    return not has_error, output
+def run_cli(*args: str, timeout: int = 90) -> tuple[bool, str]:
+    try:
+        result = subprocess.run(
+            ["npx", "@playwright/cli", *args],
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+        output = result.stdout + result.stderr
+        return result.returncode == 0, output
+    except subprocess.TimeoutExpired:
+        return False, "TIMEOUT"
 
 
-def snapshot() -> str:
-    """スナップショットを取得して内容を返す"""
-    _, output = run_cli("snapshot")
+def snapshot_content() -> str:
+    """最新のスナップショットを取得して内容を返す"""
+    run_cli("snapshot")
     snapshots = sorted(glob.glob(".playwright-cli/page-*.yml"))
     if not snapshots:
-        return output
+        return ""
     with open(snapshots[-1], "r") as f:
-        return output + "\n" + f.read()
+        return f.read()
 
 
 def find_ref(content: str, pattern: str) -> str | None:
+    """スナップショットからパターンにマッチする要素のrefを返す"""
     match = re.search(rf'{pattern}.*?\[ref=(\w+)\]', content)
     return match.group(1) if match else None
 
 
 def collect_old_items() -> list[str]:
-    """出品一覧ページから2週間以上前の商品IDを収集する。
-    「もっと見る」ボタンがあれば全件読み込むまでクリックを繰り返す。
-    """
-    ok, _ = run_cli("goto", "https://jp.mercari.com/mypage/listings", timeout=60)
+    """出品一覧ページから2週間以上前の商品IDを収集する（ページネーション対応）"""
+    ok, _ = run_cli("goto", "https://jp.mercari.com/mypage/listings")
     if not ok:
         print("ERROR: 出品一覧ページに遷移できませんでした")
         sys.exit(1)
-    time.sleep(3)
 
+    time.sleep(3)
+    seen: set[str] = set()
     all_items: list[str] = []
 
     while True:
-        snap = snapshot()
-        items = _extract_old_items(snap)
+        content = snapshot_content()
+        items = _parse_old_items(content)
         for item_id in items:
-            if item_id not in all_items:
+            if item_id not in seen:
+                seen.add(item_id)
                 all_items.append(item_id)
 
-        # 「もっと見る」ボタンを探す
-        more_ref = find_ref(snap, r'button "もっと見る"')
+        # 「もっと見る」ボタンがあればクリックして続行
+        more_ref = find_ref(content, r'button "もっと見る"')
         if not more_ref:
             break
 
         print(f"  ({len(all_items)}件収集済み、もっと見る...)")
-        ok, _ = run_cli("click", more_ref)
-        if not ok:
-            break
-        time.sleep(2)
+        run_cli("click", more_ref)
+        time.sleep(3)
 
     return all_items
 
 
-def _extract_old_items(content: str) -> list[str]:
+def _parse_old_items(content: str) -> list[str]:
     """スナップショットから2週間以上前の商品IDを抽出する"""
     url_pattern = re.compile(r"/url: /item/(m\d+)")
     date_pattern = re.compile(r"(\d+)(時間|日|か月)前に更新")
@@ -116,40 +114,43 @@ def _extract_old_items(content: str) -> list[str]:
 
 def delete_item(item_id: str) -> bool:
     """商品を1件削除する"""
-    ok, _ = run_cli("goto", f"https://jp.mercari.com/sell/edit/{item_id}", timeout=60)
+    ok, output = run_cli("goto", f"https://jp.mercari.com/sell/edit/{item_id}")
     if not ok:
+        if output == "TIMEOUT":
+            print("(タイムアウト)", end=" ")
         return False
+    time.sleep(4)
+
+    # スナップショットから「この商品を削除する」ボタンのrefを取得
+    content = snapshot_content()
+    delete_ref = find_ref(content, r'button "この商品を削除する"')
+    if not delete_ref:
+        print("(削除ボタン不在)", end=" ")
+        return False
+
+    run_cli("click", delete_ref)
+    time.sleep(1)
+
+    # 確認ダイアログから「削除する」ボタンのrefを取得
+    content = snapshot_content()
+    confirm_ref = find_ref(content, r'dialog.*\n.*\n.*\n.*button "削除する"')
+    if not confirm_ref:
+        # フォールバック: ダイアログ内の「削除する」ボタンを探す
+        confirm_ref = find_ref(content, r'button "削除する"')
+    if not confirm_ref:
+        print("(確認ボタン不在)", end=" ")
+        return False
+
+    run_cli("click", confirm_ref)
     time.sleep(2)
 
-    # 「この商品を削除する」ボタンを探してクリック
-    snap = snapshot()
-    ref = find_ref(snap, r'button "この商品を削除する"')
-    if not ref:
-        print("(削除ボタンなし)", end=" ")
-        return False
-    ok, _ = run_cli("click", ref)
-    if not ok:
-        return False
-    time.sleep(1)
+    # 削除成功の検証: 出品一覧ページにリダイレクトされるはず
+    content = snapshot_content()
+    if "/mypage/listings" in content or "出品した商品" in content:
+        return True
 
-    # 確認ダイアログの「削除する」ボタンをクリック
-    snap = snapshot()
-    # dialog 配下の「削除する」ボタンを探す
-    dialog_match = re.search(
-        r'dialog.*?button "削除する".*?\[ref=(\w+)\]', snap, re.DOTALL
-    )
-    ref = dialog_match.group(1) if dialog_match else None
-    if not ref:
-        ref = find_ref(snap, r'button "削除する"')
-    if not ref:
-        print("(確認ダイアログなし)", end=" ")
-        return False
-    ok, _ = run_cli("click", ref)
-    if not ok:
-        return False
-
-    time.sleep(1)
-    return True
+    print("(リダイレクト未確認)", end=" ")
+    return False
 
 
 def main():
