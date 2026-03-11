@@ -1,0 +1,9 @@
+default_border pixel 2
+gaps inner 1
+gaps outer 1
+
+#                           border   bg       text     indi     childborder
+client.focused          #1ec81e  #050a05  #1ec81e  #1ec81e  #1ec81e
+client.focused_inactive #0a200a  #050a05  #1e801e  #0a200a  #0a200a
+client.unfocused        #0a200a  #050a05  #1e801e  #0a200a  #0a200a
+client.urgent           #ff3c3c  #050a05  #ff3c3c  #ff3c3c  #ff3c3c

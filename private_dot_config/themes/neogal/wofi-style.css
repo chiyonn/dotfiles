@@ -1,0 +1,35 @@
+/* ── NEOGAL ── */
+window {
+    background-color: rgba(20, 0, 30, 0.9);
+    border: 2px solid #ff36ab;
+    border-radius: 16px;
+    padding: 6px;
+}
+
+#input {
+    margin: 4px;
+    padding: 8px 12px;
+    border: none;
+    border-bottom: 1px solid rgba(255, 54, 171, 0.25);
+    background-color: rgba(255, 54, 171, 0.08);
+    border-radius: 12px;
+    color: #ffb8e6;
+}
+
+#inner-box, #outer-box, #scroll, #text {
+    margin: 0;
+    padding: 0;
+}
+
+#entry {
+    padding: 6px 12px;
+    margin: 2px 4px;
+    border-radius: 12px;
+    background-color: transparent;
+    color: #ffb8e6;
+}
+
+#entry:selected {
+    background-color: #ff36ab;
+    color: #14001e;
+}

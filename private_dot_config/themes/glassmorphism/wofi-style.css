@@ -1,0 +1,35 @@
+/* ── GLASSMORPHISM ── */
+window {
+    background-color: rgba(26, 26, 46, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 8px;
+}
+
+#input {
+    margin: 4px;
+    padding: 8px 12px;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+#inner-box, #outer-box, #scroll, #text {
+    margin: 0;
+    padding: 0;
+}
+
+#entry {
+    padding: 6px 12px;
+    margin: 2px 4px;
+    border-radius: 10px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#entry:selected {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}

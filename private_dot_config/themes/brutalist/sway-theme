@@ -1,0 +1,9 @@
+default_border pixel 3
+gaps inner 0
+gaps outer 0
+
+#                           border   bg       text     indi     childborder
+client.focused          #ffffff  #ffffff  #000000  #ff3333  #ffffff
+client.focused_inactive #333333  #000000  #ffffff  #333333  #333333
+client.unfocused        #333333  #000000  #ffffff  #333333  #333333
+client.urgent           #ff3333  #ff3333  #000000  #ff3333  #ff3333
