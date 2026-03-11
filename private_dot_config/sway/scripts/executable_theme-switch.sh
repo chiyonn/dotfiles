@@ -47,6 +47,11 @@ sed -i '/^\[colors\]/,$d' "$HOME/.config/foot/foot.ini"
 cat /tmp/foot-colors-new >> "$HOME/.config/foot/foot.ini"
 rm -f /tmp/foot-colors-new
 
+# nvim colorscheme
+if [ -f "$SRC/nvim-theme" ]; then
+    cp "$SRC/nvim-theme" "$HOME/.config/nvim/theme"
+fi
+
 # wallpaper (write to sway config so it survives reload)
 if [ -f "$SRC/wallpaper" ]; then
     WP=$(cat "$SRC/wallpaper")
