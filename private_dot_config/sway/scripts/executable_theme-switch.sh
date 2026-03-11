@@ -47,6 +47,15 @@ sed -i '/^\[colors\]/,$d' "$HOME/.config/foot/foot.ini"
 cat /tmp/foot-colors-new >> "$HOME/.config/foot/foot.ini"
 rm -f /tmp/foot-colors-new
 
+# wallpaper (write to sway config so it survives reload)
+if [ -f "$SRC/wallpaper" ]; then
+    WP=$(cat "$SRC/wallpaper")
+    if [ -f "$WP" ]; then
+        printf '# background\noutput * bg %s fill\n' "$WP" \
+            > "$HOME/.config/sway/config.d/output"
+    fi
+fi
+
 # reload
 pkill waybar 2>/dev/null; sleep 0.2; waybar &disown
 pkill swaync 2>/dev/null; sleep 0.2; swaync &disown

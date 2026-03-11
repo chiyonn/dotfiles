@@ -1,4 +1,4 @@
-/* ── NEOGAL ── */
+/* ── NEOGAL : Rose Gold ── */
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 13px;
@@ -8,11 +8,10 @@
 }
 
 window#waybar {
-    background: rgba(20, 0, 30, 0.88);
-    border-bottom: 2px solid #ff36ab;
+    background: transparent;
 }
 
-/* ── Pill modules ── */
+/* ── Pill modules: gold jewelry ── */
 #workspaces,
 #clock,
 #network,
@@ -22,16 +21,16 @@ window#waybar {
 #memory,
 #battery,
 #custom-notification {
-    background: rgba(255, 54, 171, 0.1);
-    border: 1px solid rgba(255, 54, 171, 0.25);
+    background-image: linear-gradient(45deg, #DAAF08 0%, #FEE9A0 40%, #FFFDD0 65%, #FEE9A0 85%, #DAAF08 100%);
+    border: 2px solid #7a5200;
     border-radius: 20px;
     padding: 2px 14px;
     margin: 4px 2px;
-    color: #ffb8e6;
+    color: #7a5200;
     transition: all 0.3s ease;
 }
 
-/* ── Hover: pop ── */
+/* ── Hover ── */
 #network:hover,
 #pulseaudio:hover,
 #temperature:hover,
@@ -39,20 +38,17 @@ window#waybar {
 #memory:hover,
 #battery:hover,
 #custom-notification:hover {
-    background: #ff36ab;
-    color: #1a0020;
-    border-color: #ff36ab;
+    background-image: linear-gradient(45deg, #FEE9A0 0%, #FFFDD0 40%, #ffffff 65%, #FFFDD0 80%, #FEE9A0 100%);
+    color: #7a5200;
 }
 
 /* ── Workspaces ── */
 #workspaces {
     padding: 2px 4px;
-    background: rgba(255, 54, 171, 0.06);
-    border-color: rgba(255, 54, 171, 0.15);
 }
 
 #workspaces button {
-    color: rgba(255, 184, 230, 0.35);
+    color: #9a7520;
     background: transparent;
     border-radius: 14px;
     padding: 1px 10px;
@@ -61,47 +57,49 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    color: #1a0020;
-    background: #ff36ab;
+    color: #7a5200;
+    background: rgba(255, 255, 255, 0.4);
 }
 
 #workspaces button.urgent {
-    color: #1a0020;
-    background: #ffe156;
+    color: #5c1a30;
+    background: #f5d0dc;
 }
 
-/* ── Clock: neon highlight ── */
+/* ── Clock: rose ── */
 #clock {
-    color: #ffe156;
-    background: rgba(255, 225, 86, 0.1);
-    border-color: rgba(255, 225, 86, 0.3);
-    letter-spacing: 0.5px;
+    background-image: linear-gradient(45deg, #e8a4b8 0%, #f5d0dc 40%, #fce8ef 65%, #f5d0dc 85%, #e8a4b8 100%);
+    border-color: #5c1a30;
+    color: #5c1a30;
 }
 
-/* ── Notification ── */
+/* ── Notification: lavender ── */
 #custom-notification {
-    color: #b4f8c8;
+    background-image: linear-gradient(45deg, #c9a0dc 0%, #e4d0f0 40%, #f0e6f8 65%, #e4d0f0 85%, #c9a0dc 100%);
+    border-color: #4a2a66;
+    color: #4a2a66;
 }
 
 /* ── Status ── */
 #temperature.critical {
-    background: #ff36ab;
-    color: #1a0020;
-    border-color: #ff36ab;
+    background-image: linear-gradient(45deg, #e8a4b8 0%, #f5d0dc 50%, #e8a4b8 100%);
+    border-color: #5c1a30;
+    color: #5c1a30;
 }
 
 #battery.charging {
-    color: #b4f8c8;
+    background-image: linear-gradient(45deg, #a8d5ba 0%, #d0f0dc 50%, #a8d5ba 100%);
+    border-color: #1a5c30;
+    color: #1a5c30;
 }
 
 #battery.warning {
-    color: #ffe156;
-    background: rgba(255, 225, 86, 0.15);
-    border-color: rgba(255, 225, 86, 0.3);
+    background-image: linear-gradient(45deg, #DAAF08 0%, #FEE9A0 50%, #DAAF08 100%);
+    color: #7a5200;
 }
 
 #battery.critical {
-    background: #ff36ab;
-    color: #1a0020;
-    border-color: #ff36ab;
+    background-image: linear-gradient(45deg, #e8a4b8 0%, #f5d0dc 50%, #e8a4b8 100%);
+    border-color: #5c1a30;
+    color: #5c1a30;
 }

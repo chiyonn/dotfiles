@@ -1,13 +1,14 @@
-/* ── NEOGAL ── */
-@define-color bg rgba(20, 0, 30, 0.88);
-@define-color fg #ffb8e6;
-@define-color accent #ff36ab;
-@define-color yellow #ffe156;
-@define-color mint #b4f8c8;
-@define-color dim rgba(255, 184, 230, 0.35);
-@define-color pill rgba(255, 54, 171, 0.1);
-@define-color pill-border rgba(255, 54, 171, 0.25);
-@define-color pill-hover rgba(255, 54, 171, 0.3);
+/* ── NEOGAL : Rose Gold ── */
+@define-color bg rgba(26, 17, 24, 0.92);
+@define-color fg #1a1118;
+@define-color fg-light #f5e6ec;
+@define-color gold-dark #B67B03;
+@define-color gold-mid #DAAF08;
+@define-color gold-light #FEE9A0;
+@define-color rose-dark #a0586e;
+@define-color rose-mid #e8a4b8;
+@define-color rose-light #f5d0dc;
+@define-color lavender #c9a0dc;
 
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
@@ -34,30 +35,29 @@
 
 .notification-row .notification-background .notification {
     border-radius: 16px;
-    border: 2px solid @accent;
+    border: 2px solid @gold-dark;
     padding: 0;
-    background: @bg;
+    background: rgba(232, 164, 184, 0.95);
 }
 
 .notification-row .notification-background .close-button {
-    background: @accent;
-    color: @bg;
+    background-image: linear-gradient(45deg, #a0586e 0%, #e8a4b8 50%, #a0586e 100%);
+    color: @fg;
     text-shadow: none;
     padding: 0;
     border-radius: 100%;
     margin-top: 5px;
     margin-right: 5px;
     box-shadow: none;
-    border: none;
+    border: 2px solid @rose-dark;
     min-width: 20px;
     min-height: 20px;
 }
 
 .notification-row .notification-background .close-button:hover {
-    background: @yellow;
-    color: @bg;
+    background-image: linear-gradient(45deg, #e8a4b8 0%, #f5d0dc 50%, #e8a4b8 100%);
+    color: @fg;
     box-shadow: none;
-    border: none;
 }
 
 .notification-row .notification-background .notification .notification-default-action,
@@ -73,7 +73,7 @@
 
 .notification-row .notification-background .notification .notification-default-action:hover,
 .notification-row .notification-background .notification .notification-action:hover {
-    background: @pill-hover;
+    background: rgba(254, 233, 160, 0.3);
 }
 
 .notification-row .notification-background .notification .notification-default-action {
@@ -100,14 +100,14 @@
 .notification-row .notification-background .notification .notification-content .text-box .summary {
     font-size: 14px;
     font-weight: 900;
-    color: @accent;
+    color: @fg;
     background: transparent;
     text-shadow: none;
 }
 
 .notification-row .notification-background .notification .notification-content .text-box .time {
     font-size: 11px;
-    color: @dim;
+    color: #6b5a10;
     background: transparent;
     text-shadow: none;
     margin-right: 20px;
@@ -116,15 +116,15 @@
 .notification-row .notification-background .notification .notification-content .text-box .body {
     font-size: 13px;
     font-weight: 400;
-    color: @fg;
+    color: #3a2a08;
     background: transparent;
     text-shadow: none;
 }
 
 .notification-row .notification-background .notification .notification-action {
-    border-top: 1px solid @pill-border;
+    border-top: 1px solid rgba(182, 123, 3, 0.3);
     border-radius: 0;
-    border-right: 1px solid @pill-border;
+    border-right: 1px solid rgba(182, 123, 3, 0.3);
 }
 
 .notification-row .notification-background .notification .notification-action:first-child {
@@ -138,10 +138,10 @@
 
 /* ── Control Center ── */
 .control-center {
-    background: @bg;
+    background: rgba(245, 208, 220, 0.95);
     color: @fg;
     border-radius: 18px;
-    border: 2px solid @accent;
+    border: 2px solid @gold-dark;
 }
 
 .control-center .control-center-list-placeholder {
@@ -162,7 +162,7 @@
 
 /* ── Title ── */
 .widget-title {
-    color: @yellow;
+    color: @fg;
     margin: 10px 14px 4px 14px;
     font-size: 1.1rem;
     letter-spacing: 1px;
@@ -170,10 +170,10 @@
 
 .widget-title > button {
     font-size: initial;
-    color: @bg;
+    color: @fg;
     text-shadow: none;
-    background: @accent;
-    border: none;
+    background-image: linear-gradient(45deg, #a0586e 0%, #e8a4b8 40%, #f5d0dc 65%, #e8a4b8 80%, #a0586e 100%);
+    border: 2px solid @rose-dark;
     box-shadow: none;
     border-radius: 12px;
     font-weight: 900;
@@ -181,8 +181,8 @@
 }
 
 .widget-title > button:hover {
-    background: @yellow;
-    color: @bg;
+    background-image: linear-gradient(45deg, #e8a4b8 0%, #f5d0dc 50%, #e8a4b8 100%);
+    color: @fg;
 }
 
 /* ── DND ── */
@@ -195,17 +195,17 @@
 .widget-dnd > switch {
     font-size: initial;
     border-radius: 12px;
-    background: @pill;
-    border: 1px solid @pill-border;
+    background: rgba(182, 123, 3, 0.2);
+    border: 1px solid @gold-dark;
     box-shadow: none;
     transition: background 0.2s ease;
 }
 
 .widget-dnd > switch:checked {
-    background: @accent;
+    background-image: linear-gradient(45deg, #a0586e 0%, #e8a4b8 50%, #a0586e 100%);
 }
 
 .widget-dnd > switch slider {
-    background: @yellow;
+    background-image: linear-gradient(45deg, #B67B03 0%, #FEE9A0 50%, #B67B03 100%);
     border-radius: 12px;
 }

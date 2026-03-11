@@ -1,9 +1,31 @@
-default_border pixel 2
+default_border pixel 4
 gaps inner 5
 gaps outer 5
 
 #                           border   bg       text     indi     childborder
-client.focused          #ff36ab  #14001e  #ffb8e6  #ffe156  #ff36ab
-client.focused_inactive #330022  #14001e  #ffb8e6  #330022  #330022
-client.unfocused        #330022  #14001e  #664466  #330022  #330022
-client.urgent           #ffe156  #ffe156  #14001e  #ffe156  #ffe156
+client.focused          #7a5200  #1a1118  #FEE9A0  #DAAF08  #7a5200
+client.focused_inactive #2a1a24  #1a1118  #f5e6ec  #2a1a24  #2a1a24
+client.unfocused        #2a1a24  #1a1118  #886677  #2a1a24  #2a1a24
+client.urgent           #5c1a30  #e8a4b8  #1a1118  #e8a4b8  #5c1a30
+
+# swayfx
+blur disable
+shadows enable
+shadow_blur_radius 15
+shadow_color #1a111880
+corner_radius 12
+default_dim_inactive 0.1
+
+layer_effects "waybar" {
+    corner_radius 20;
+}
+
+layer_effects "swaync-control-center" {
+    shadows enable;
+    corner_radius 18;
+}
+
+layer_effects "swaync-notification-window" {
+    shadows enable;
+    corner_radius 16;
+}

@@ -40,7 +40,7 @@
     },
     "cpu": {
         "tooltip": false,
-        "format": "⚡ {usage}%",
+        "format": "✧ {usage}%",
         "interval": 1
     },
     "memory": {
@@ -66,7 +66,7 @@
     },
     "clock": {
         "tooltip": false,
-        "format": "♡ {:%m/%d %a ♡ %H:%M}",
+        "format": "♡ {:%m/%d %a  %H:%M}",
         "interval": 1
     }
 }
