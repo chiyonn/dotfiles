@@ -52,6 +52,12 @@ if [ -f "$SRC/nvim-theme" ]; then
     cp "$SRC/nvim-theme" "$HOME/.config/nvim/theme"
 fi
 
+# fcitx5 theme
+if [ -f "$SRC/fcitx5-theme" ]; then
+    FCITX_THEME=$(cat "$SRC/fcitx5-theme")
+    sed -i "s/^Theme=.*/Theme=$FCITX_THEME/" "$HOME/.config/fcitx5/conf/classicui.conf" 2>/dev/null
+fi
+
 # wallpaper (write to sway config so it survives reload)
 if [ -f "$SRC/wallpaper" ]; then
     WP=$(cat "$SRC/wallpaper")
@@ -64,6 +70,7 @@ fi
 # reload
 pkill waybar 2>/dev/null; sleep 0.2; waybar &disown
 pkill swaync 2>/dev/null; sleep 0.2; swaync &disown
+fcitx5 -r -d 2>/dev/null
 swaymsg reload 2>/dev/null
 
 echo "switched to: $THEME"
