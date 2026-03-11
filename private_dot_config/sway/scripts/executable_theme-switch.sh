@@ -20,6 +20,9 @@ fi
 
 SRC="$THEME_DIR/$THEME"
 
+# record current theme
+echo "$THEME" > "$THEME_DIR/.current"
+
 # waybar
 cp "$SRC/waybar-config" "$HOME/.config/waybar/config"
 cp "$SRC/waybar-style.css" "$HOME/.config/waybar/style.css"
@@ -31,8 +34,14 @@ cp "$SRC/swaync-style.css" "$HOME/.config/swaync/style.css"
 # wofi
 cp "$SRC/wofi-style.css" "$HOME/.config/wofi/style.css"
 
-# swaylock
+# swaylock (inject wallpaper path if available)
 cp "$SRC/swaylock" "$HOME/.config/swaylock/config"
+if [ -f "$SRC/wallpaper" ]; then
+    WP=$(cat "$SRC/wallpaper")
+    if [ -f "$WP" ]; then
+        sed -i "1i image=$WP" "$HOME/.config/swaylock/config"
+    fi
+fi
 
 # sway colors
 cp "$SRC/sway-theme" "$HOME/.config/sway/config.d/theme"

@@ -21,11 +21,9 @@ layer_effects "waybar" {
 }
 
 layer_effects "swaync-control-center" {
-    shadows enable;
     corner_radius 18;
 }
 
 layer_effects "swaync-notification-window" {
-    shadows enable;
     corner_radius 16;
 }
