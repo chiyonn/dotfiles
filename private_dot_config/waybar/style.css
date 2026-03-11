@@ -1,76 +1,99 @@
+/* ── Base ── */
 * {
-    font-family: monospace;
-    font-size: 16px;
-    color: #ebdbb2; /* light1 */
-}
-
-window#waybar {
-    background: #282828; /* dark0 */
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans CJK JP", monospace;
+    font-size: 14px;
     border: none;
-    margin: 0;
-    padding: 0;
+    min-height: 0;
 }
 
-#window,
+/* ── Bar ── */
+window#waybar {
+    background: transparent;
+}
+
+/* ── Shared pill style ── */
 #workspaces,
+#clock,
 #network,
-#backlight,
 #pulseaudio,
 #temperature,
 #cpu,
 #memory,
-#disk,
 #battery,
-#clock {
-    padding: 4px;
-    margin: 0;
-    border: none;
-    border-radius: 0;
+#custom-notification {
+    background: rgba(10, 10, 20, 0.65);
+    border-radius: 10px;
+    padding: 4px 14px;
+    margin: 4px 3px;
+    color: rgba(255, 255, 255, 0.82);
+    transition: all 0.3s ease;
 }
 
-/* Workspaces */
+/* ── Hover glow (cyan) ── */
+#network:hover,
+#pulseaudio:hover,
+#temperature:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#custom-notification:hover {
+    background: rgba(0, 220, 220, 0.12);
+    color: #00e5e5;
+}
+
+/* ── Workspaces ── */
+#workspaces {
+    padding: 2px 4px;
+}
+
 #workspaces button {
-    border: none;
-    margin: 0;
-    border-radius: 0;
-    color: #ebdbb2;
-    background: #3c3836; /* dark1 */
+    color: rgba(255, 255, 255, 0.35);
+    background: transparent;
+    border-radius: 8px;
+    padding: 2px 10px;
+    margin: 2px;
+    transition: all 0.3s ease;
 }
 
 #workspaces button.focused {
-    background: #504945; /* dark2 */
-    color: #fbf1c7; /* light0 */
+    color: #00e5e5;
+    background: rgba(0, 220, 220, 0.12);
+}
+
+#workspaces button.urgent {
+    color: #1a1a2e;
+    background: rgba(255, 120, 120, 0.6);
+}
+
+/* ── Clock (center accent) ── */
+#clock {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #00e5e5;
+    background: rgba(0, 220, 220, 0.15);
+}
+
+/* ── Status colors ── */
+#temperature.critical {
+    color: #ff6b6b;
+    animation: pulse 1.5s ease-in-out infinite alternate;
 }
 
 #battery.charging {
-    color: #83a598; /* bright_blue */
+    color: #00e5e5;
 }
 
-#temperature.cold {
-    color: #83a598; /* bright_blue */
-}
-
-/* Normal status */
-#battery:not(.charging):not(.warning):not(.critical),
-#temperature {
-    color: #b8bb26; /* bright_green */
-}
-
-/* Warning states */
-#temperature.warning,
 #battery.warning {
-    color: #fabd2f; /* bright_yellow */
+    color: #ffd56b;
 }
 
-/* Critical states */
-#battery.critical,
-#temperature.critical {
-    color: #fb4934; /* bright_red */
+#battery.critical {
+    color: #ff6b6b;
+    animation: pulse 1.5s ease-in-out infinite alternate;
 }
 
-/* Optional: blink for critical status (can be removed for more minimal look) */
-@keyframes blink-critical {
-    50% {
-        opacity: 0.5;
-    }
+/* ── Pulse animation ── */
+@keyframes pulse {
+    from { opacity: 1; }
+    to { opacity: 0.5; }
 }

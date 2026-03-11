@@ -13,6 +13,7 @@
     #       $mod+l binded to window focus right
     bindsym $mod+m exec $HOME/.config/sway/scripts/launch_guitar_reaper.sh
     #       $mod+n binded to move to next workspace
+    bindsym $mod+Escape exec swaync-client -t -sw
     bindsym $mod+o exec $browser
     #       $mod+p binded to move to previous workspace
     #       $mod+q none

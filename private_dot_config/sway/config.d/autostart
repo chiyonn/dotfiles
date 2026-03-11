@@ -8,4 +8,10 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 
 # exec_always --no-startup-id ~/.config/sway/scripts/clamshell.sh
 
+# status bar
+exec waybar
+
+# notification daemon
+exec swaync
+
 exec --no-startup-id $scratchpad_call
