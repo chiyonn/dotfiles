@@ -1,16 +1,18 @@
-/* ── CRT TERMINAL ── */
-@define-color phosphor rgba(30, 200, 30, 0.7);
-@define-color phosphor-bright rgba(30, 255, 30, 0.95);
-@define-color phosphor-dim rgba(30, 200, 30, 0.3);
-@define-color phosphor-bg rgba(30, 200, 30, 0.08);
-@define-color phosphor-border rgba(30, 200, 30, 0.2);
-@define-color screen rgba(5, 10, 5, 0.92);
-@define-color red rgba(255, 60, 60, 0.9);
+/* ── GLASSMORPHISM ── */
+@define-color cc-bg rgba(30, 30, 40, 0.6);
+@define-color noti-bg rgba(255, 255, 255, 0.07);
+@define-color noti-border rgba(255, 255, 255, 0.12);
+@define-color noti-hover rgba(255, 255, 255, 0.12);
+@define-color close-bg rgba(255, 255, 255, 0.1);
+@define-color close-hover rgba(255, 255, 255, 0.2);
+@define-color fg rgba(255, 255, 255, 0.85);
+@define-color fg-dim rgba(255, 255, 255, 0.4);
+@define-color accent rgba(255, 255, 255, 0.95);
 
 * {
-    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans CJK JP", monospace;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .floating-notifications {
@@ -31,30 +33,30 @@
 }
 
 .notification-row .notification-background .notification {
-    border-radius: 0;
-    border: 1px solid @phosphor-border;
+    border-radius: 16px;
+    border: 1px solid @noti-border;
     padding: 0;
-    background: @screen;
+    background: @noti-bg;
+    transition: background 0.3s ease;
 }
 
 .notification-row .notification-background .close-button {
-    background: transparent;
-    color: @phosphor;
-    text-shadow: 0 0 6px rgba(30, 200, 30, 0.4);
+    background: @close-bg;
+    color: @fg;
+    text-shadow: none;
     padding: 0;
-    border-radius: 0;
-    margin-top: 4px;
+    border-radius: 100%;
+    margin-top: 6px;
     margin-right: 6px;
     box-shadow: none;
     border: none;
     min-width: 20px;
     min-height: 20px;
+    transition: background 0.3s ease;
 }
 
 .notification-row .notification-background .close-button:hover {
-    color: @phosphor-bright;
-    background: @phosphor-bg;
-    text-shadow: 0 0 10px rgba(30, 255, 30, 0.6);
+    background: @close-hover;
     box-shadow: none;
     border: none;
 }
@@ -66,18 +68,17 @@
     box-shadow: none;
     background: transparent;
     border: none;
-    color: @phosphor;
-    text-shadow: 0 0 6px rgba(30, 200, 30, 0.4);
+    color: @fg;
+    transition: background 0.3s ease;
 }
 
 .notification-row .notification-background .notification .notification-default-action:hover,
 .notification-row .notification-background .notification .notification-action:hover {
-    background: @phosphor-bg;
-    color: @phosphor-bright;
+    background: @noti-hover;
 }
 
 .notification-row .notification-background .notification .notification-default-action {
-    border-radius: 0;
+    border-radius: 16px;
 }
 
 .notification-row .notification-background .notification .notification-default-action:not(:only-child) {
@@ -87,27 +88,27 @@
 
 .notification-row .notification-background .notification .notification-content {
     background: transparent;
-    border-radius: 0;
+    border-radius: 16px;
     padding: 8px;
 }
 
 .notification-row .notification-background .notification .notification-content .image {
     -gtk-icon-effect: none;
-    border-radius: 0;
+    border-radius: 12px;
     margin: 4px;
 }
 
 .notification-row .notification-background .notification .notification-content .text-box .summary {
     font-size: 14px;
-    font-weight: 700;
-    color: @phosphor-bright;
+    font-weight: 600;
+    color: @accent;
     background: transparent;
-    text-shadow: 0 0 10px rgba(30, 255, 30, 0.5);
+    text-shadow: none;
 }
 
 .notification-row .notification-background .notification .notification-content .text-box .time {
-    font-size: 12px;
-    color: @phosphor-dim;
+    font-size: 11px;
+    color: @fg-dim;
     background: transparent;
     text-shadow: none;
     margin-right: 20px;
@@ -116,32 +117,32 @@
 .notification-row .notification-background .notification .notification-content .text-box .body {
     font-size: 13px;
     font-weight: 400;
-    color: @phosphor;
+    color: @fg;
     background: transparent;
-    text-shadow: 0 0 4px rgba(30, 200, 30, 0.3);
+    text-shadow: none;
 }
 
 .notification-row .notification-background .notification .notification-action {
-    border-top: 1px solid @phosphor-border;
+    border-top: 1px solid @noti-border;
     border-radius: 0;
-    border-right: 1px solid @phosphor-border;
+    border-right: 1px solid @noti-border;
 }
 
 .notification-row .notification-background .notification .notification-action:first-child {
-    border-bottom-left-radius: 0;
+    border-bottom-left-radius: 16px;
 }
 
 .notification-row .notification-background .notification .notification-action:last-child {
-    border-bottom-right-radius: 0;
+    border-bottom-right-radius: 16px;
     border-right: none;
 }
 
 /* ── Control Center ── */
 .control-center {
-    background: @screen;
-    color: @phosphor;
-    border-radius: 0;
-    border: 1px solid @phosphor-border;
+    background: @cc-bg;
+    color: @fg;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .control-center .control-center-list-placeholder {
@@ -162,53 +163,50 @@
 
 /* ── Title ── */
 .widget-title {
-    color: @phosphor-bright;
-    margin: 12px 12px 4px 12px;
+    color: @accent;
+    margin: 12px 14px 4px 14px;
     font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(30, 255, 30, 0.5);
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .widget-title > button {
     font-size: initial;
-    color: @phosphor;
-    text-shadow: 0 0 6px rgba(30, 200, 30, 0.4);
-    background: transparent;
-    border: 1px solid @phosphor-border;
+    color: @fg;
+    text-shadow: none;
+    background: @noti-bg;
+    border: 1px solid @noti-border;
     box-shadow: none;
-    border-radius: 0;
-    font-weight: 700;
+    border-radius: 12px;
+    transition: background 0.3s ease;
 }
 
 .widget-title > button:hover {
-    background: @phosphor-bg;
-    color: @phosphor-bright;
+    background: @noti-hover;
 }
 
 /* ── DND ── */
 .widget-dnd {
-    color: @phosphor;
-    margin: 4px 12px;
+    color: @fg;
+    margin: 4px 14px;
     font-size: 0.9rem;
-    letter-spacing: 1px;
-    text-shadow: 0 0 4px rgba(30, 200, 30, 0.3);
+    letter-spacing: 0.5px;
 }
 
 .widget-dnd > switch {
     font-size: initial;
-    border-radius: 0;
-    background: transparent;
-    border: 1px solid @phosphor-border;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid @noti-border;
     box-shadow: none;
+    transition: background 0.3s ease;
 }
 
 .widget-dnd > switch:checked {
-    background: @phosphor-bg;
-    border-color: @phosphor;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .widget-dnd > switch slider {
-    background: @phosphor;
-    border-radius: 0;
+    background: @accent;
+    border-radius: 12px;
 }

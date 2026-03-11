@@ -1,0 +1,100 @@
+/* ── BRUTALIST ── */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #000000;
+    border-bottom: 3px solid #ffffff;
+}
+
+/* ── All modules ── */
+#workspaces,
+#clock,
+#network,
+#pulseaudio,
+#temperature,
+#cpu,
+#memory,
+#battery,
+#custom-notification {
+    background: #000000;
+    color: #ffffff;
+    border-radius: 0;
+    border-right: 2px solid #333333;
+    padding: 0 16px;
+    margin: 0;
+}
+
+/* ── Hover: instant flip ── */
+#network:hover,
+#pulseaudio:hover,
+#temperature:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#custom-notification:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+/* ── Workspaces ── */
+#workspaces {
+    padding: 0;
+}
+
+#workspaces button {
+    color: #555555;
+    background: #000000;
+    border-radius: 0;
+    border-right: 1px solid #333333;
+    padding: 0 14px;
+    margin: 0;
+}
+
+#workspaces button.focused {
+    color: #000000;
+    background: #ff3333;
+}
+
+#workspaces button.urgent {
+    color: #000000;
+    background: #ffffff;
+}
+
+/* ── Clock: the one accent ── */
+#clock {
+    color: #ff3333;
+    border-right: none;
+    border-left: 2px solid #333333;
+    letter-spacing: 1px;
+}
+
+/* ── Notification with unread ── */
+#custom-notification {
+    border-right: none;
+}
+
+/* ── Critical: no animation, just scream ── */
+#temperature.critical {
+    background: #ff3333;
+    color: #000000;
+}
+
+#battery.charging {
+    color: #ff3333;
+}
+
+#battery.warning {
+    background: #ff3333;
+    color: #000000;
+}
+
+#battery.critical {
+    background: #ff3333;
+    color: #000000;
+}

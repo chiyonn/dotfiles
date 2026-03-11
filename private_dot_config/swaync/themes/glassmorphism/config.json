@@ -34,12 +34,12 @@
   ],
   "widget-config": {
     "title": {
-      "text": "// MESSAGES",
+      "text": "Notifications",
       "clear-all-button": true,
-      "button-text": "PURGE"
+      "button-text": "Clear"
     },
     "dnd": {
-      "text": "SILENT MODE"
+      "text": "Do Not Disturb"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "position": "bottom",
+    "position": "top",
     "margin-top": 0,
     "margin-left": 0,
     "margin-right": 0,
@@ -17,46 +17,46 @@
     ],
     "sway/workspaces": {
         "disable-scroll": false,
-        "format": "[{name}]"
+        "format": "{name}"
     },
     "pulseaudio": {
-        "format": "vol:{volume}",
-        "format-bluetooth": "bt:{volume}",
-        "format-muted": "vol:--",
-        "format-bluetooth-muted": "bt:--",
+        "format": "VOL {volume}",
+        "format-bluetooth": "BT {volume}",
+        "format-muted": "MUTE",
+        "format-bluetooth-muted": "BT MUTE",
         "on-click": "pavucontrol"
     },
     "network": {
-        "format-wifi": "net:{essid}",
-        "format-ethernet": "net:eth0",
-        "format-disconnected": "net:none",
+        "format-wifi": "NET {essid}",
+        "format-ethernet": "NET ETH",
+        "format-disconnected": "NET --",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
     },
     "temperature": {
         "tooltip": false,
         "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-        "format": "tmp:{temperatureC}c",
+        "format": "TMP {temperatureC}C",
         "critical-threshold": 85,
         "interval": 1
     },
     "cpu": {
         "tooltip": false,
-        "format": "cpu:{usage}%",
+        "format": "CPU {usage}",
         "interval": 1
     },
     "memory": {
         "tooltip": false,
-        "format": "mem:{used:0.1f}g",
+        "format": "MEM {used:0.1f}G",
         "interval": 1
     },
     "custom/notification": {
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-            "notification": "msg:*",
-            "none": "msg:0",
-            "dnd-notification": "dnd:*",
-            "dnd-none": "dnd"
+            "notification": "NOTIF *",
+            "none": "NOTIF",
+            "dnd-notification": "DND *",
+            "dnd-none": "DND"
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -67,7 +67,7 @@
     },
     "clock": {
         "tooltip": false,
-        "format": "{:%H:%M:%S}",
+        "format": "{:%m/%d %H:%M}",
         "interval": 1
     }
 }

@@ -1,22 +1,21 @@
-/* ── CRT TERMINAL ── */
-@define-color phosphor rgba(30, 200, 30, 0.7);
-@define-color phosphor-bright rgba(30, 255, 30, 0.95);
-@define-color phosphor-dim rgba(30, 200, 30, 0.3);
-@define-color phosphor-bg rgba(30, 200, 30, 0.08);
-@define-color phosphor-border rgba(30, 200, 30, 0.2);
-@define-color screen rgba(5, 10, 5, 0.92);
-@define-color red rgba(255, 60, 60, 0.9);
+/* ── BRUTALIST ── */
+@define-color bg #000000;
+@define-color fg #ffffff;
+@define-color border #333333;
+@define-color accent #ff3333;
+@define-color dim #555555;
 
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 13px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .floating-notifications {
     background: transparent;
 }
 
+/* ── Notification card ── */
 .notification-row {
     outline: none;
 }
@@ -27,24 +26,24 @@
 }
 
 .notification-row .notification-background {
-    padding: 4px 8px;
+    padding: 4px 0;
 }
 
 .notification-row .notification-background .notification {
     border-radius: 0;
-    border: 1px solid @phosphor-border;
+    border: 2px solid @fg;
     padding: 0;
-    background: @screen;
+    background: @bg;
 }
 
 .notification-row .notification-background .close-button {
-    background: transparent;
-    color: @phosphor;
-    text-shadow: 0 0 6px rgba(30, 200, 30, 0.4);
+    background: @fg;
+    color: @bg;
+    text-shadow: none;
     padding: 0;
     border-radius: 0;
     margin-top: 4px;
-    margin-right: 6px;
+    margin-right: 4px;
     box-shadow: none;
     border: none;
     min-width: 20px;
@@ -52,9 +51,8 @@
 }
 
 .notification-row .notification-background .close-button:hover {
-    color: @phosphor-bright;
-    background: @phosphor-bg;
-    text-shadow: 0 0 10px rgba(30, 255, 30, 0.6);
+    background: @accent;
+    color: @bg;
     box-shadow: none;
     border: none;
 }
@@ -66,14 +64,13 @@
     box-shadow: none;
     background: transparent;
     border: none;
-    color: @phosphor;
-    text-shadow: 0 0 6px rgba(30, 200, 30, 0.4);
+    color: @fg;
 }
 
 .notification-row .notification-background .notification .notification-default-action:hover,
 .notification-row .notification-background .notification .notification-action:hover {
-    background: @phosphor-bg;
-    color: @phosphor-bright;
+    background: @fg;
+    color: @bg;
 }
 
 .notification-row .notification-background .notification .notification-default-action {
@@ -99,15 +96,15 @@
 
 .notification-row .notification-background .notification .notification-content .text-box .summary {
     font-size: 14px;
-    font-weight: 700;
-    color: @phosphor-bright;
+    font-weight: 900;
+    color: @accent;
     background: transparent;
-    text-shadow: 0 0 10px rgba(30, 255, 30, 0.5);
+    text-shadow: none;
 }
 
 .notification-row .notification-background .notification .notification-content .text-box .time {
     font-size: 12px;
-    color: @phosphor-dim;
+    color: @dim;
     background: transparent;
     text-shadow: none;
     margin-right: 20px;
@@ -116,15 +113,15 @@
 .notification-row .notification-background .notification .notification-content .text-box .body {
     font-size: 13px;
     font-weight: 400;
-    color: @phosphor;
+    color: @fg;
     background: transparent;
-    text-shadow: 0 0 4px rgba(30, 200, 30, 0.3);
+    text-shadow: none;
 }
 
 .notification-row .notification-background .notification .notification-action {
-    border-top: 1px solid @phosphor-border;
+    border-top: 2px solid @border;
     border-radius: 0;
-    border-right: 1px solid @phosphor-border;
+    border-right: 2px solid @border;
 }
 
 .notification-row .notification-background .notification .notification-action:first-child {
@@ -138,10 +135,10 @@
 
 /* ── Control Center ── */
 .control-center {
-    background: @screen;
-    color: @phosphor;
+    background: @bg;
+    color: @fg;
     border-radius: 0;
-    border: 1px solid @phosphor-border;
+    border: 3px solid @fg;
 }
 
 .control-center .control-center-list-placeholder {
@@ -162,53 +159,49 @@
 
 /* ── Title ── */
 .widget-title {
-    color: @phosphor-bright;
+    color: @accent;
     margin: 12px 12px 4px 12px;
     font-size: 1.1rem;
-    font-weight: 700;
     letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(30, 255, 30, 0.5);
 }
 
 .widget-title > button {
     font-size: initial;
-    color: @phosphor;
-    text-shadow: 0 0 6px rgba(30, 200, 30, 0.4);
-    background: transparent;
-    border: 1px solid @phosphor-border;
+    color: @bg;
+    text-shadow: none;
+    background: @fg;
+    border: none;
     box-shadow: none;
     border-radius: 0;
-    font-weight: 700;
+    font-weight: 900;
 }
 
 .widget-title > button:hover {
-    background: @phosphor-bg;
-    color: @phosphor-bright;
+    background: @accent;
+    color: @bg;
 }
 
 /* ── DND ── */
 .widget-dnd {
-    color: @phosphor;
+    color: @fg;
     margin: 4px 12px;
     font-size: 0.9rem;
     letter-spacing: 1px;
-    text-shadow: 0 0 4px rgba(30, 200, 30, 0.3);
 }
 
 .widget-dnd > switch {
     font-size: initial;
     border-radius: 0;
-    background: transparent;
-    border: 1px solid @phosphor-border;
+    background: @border;
+    border: 2px solid @fg;
     box-shadow: none;
 }
 
 .widget-dnd > switch:checked {
-    background: @phosphor-bg;
-    border-color: @phosphor;
+    background: @accent;
 }
 
 .widget-dnd > switch slider {
-    background: @phosphor;
+    background: @fg;
     border-radius: 0;
 }
