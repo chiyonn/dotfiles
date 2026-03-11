@@ -1,26 +1,56 @@
+/* ── BRUTALIST ── */
 window {
-    background-color: rgba(40, 40, 40, 0.95); /* dark0 */
-    border-radius: 4px;
-    padding: 10px;
+    background-color: #000000;
+    border: 3px solid #ffffff;
+    border-radius: 0;
+    padding: 0;
 }
 
 #input {
-    margin: 5px;
-    padding: 5px;
+    margin: 0;
+    padding: 10px 12px;
     border: none;
-    background-color: #3c3836; /* dark1 */
-    color: #ebdbb2; /* light1 */
+    border-bottom: 2px solid #333333;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#inner-box {
+    margin: 0;
+    padding: 0;
+}
+
+#outer-box {
+    margin: 0;
+    padding: 0;
+}
+
+#scroll {
+    margin: 0;
+}
+
+#text {
+    margin: 0;
+    padding: 0;
 }
 
 #entry {
-    padding: 5px;
-    margin: 2px;
-    border-radius: 4px;
-    background-color: transparent;
-    color: #ebdbb2; /* light1 */
+    padding: 8px 12px;
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #1a1a1a;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 #entry:selected {
-    background-color: #458588; /* neutral_blue */
-    color: #fbf1c7; /* light0 */
+    background-color: #ffffff;
+    color: #000000;
+    border-bottom: 1px solid #ffffff;
 }

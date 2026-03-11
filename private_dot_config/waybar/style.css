@@ -1,18 +1,18 @@
-/* ── CRT TERMINAL ── */
+/* ── BRUTALIST ── */
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: 700;
     border: none;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(5, 10, 5, 0.92);
-    border-top: 1px solid rgba(30, 200, 30, 0.25);
+    background: #000000;
+    border-bottom: 3px solid #ffffff;
 }
 
-/* ── All modules: terminal-like ── */
+/* ── All modules ── */
 #workspaces,
 #clock,
 #network,
@@ -22,15 +22,15 @@ window#waybar {
 #memory,
 #battery,
 #custom-notification {
-    background: transparent;
-    color: rgba(30, 200, 30, 0.7);
+    background: #000000;
+    color: #ffffff;
     border-radius: 0;
-    padding: 2px 12px;
+    border-right: 2px solid #333333;
+    padding: 0 16px;
     margin: 0;
-    text-shadow: 0 0 6px rgba(30, 200, 30, 0.4);
 }
 
-/* ── Hover: brighten, like selecting text ── */
+/* ── Hover: instant flip ── */
 #network:hover,
 #pulseaudio:hover,
 #temperature:hover,
@@ -38,9 +38,8 @@ window#waybar {
 #memory:hover,
 #battery:hover,
 #custom-notification:hover {
-    background: rgba(30, 200, 30, 0.12);
-    color: rgba(30, 255, 30, 0.95);
-    text-shadow: 0 0 10px rgba(30, 255, 30, 0.6);
+    background: #ffffff;
+    color: #000000;
 }
 
 /* ── Workspaces ── */
@@ -49,57 +48,53 @@ window#waybar {
 }
 
 #workspaces button {
-    color: rgba(30, 200, 30, 0.35);
-    background: transparent;
+    color: #555555;
+    background: #000000;
     border-radius: 0;
-    padding: 2px 6px;
+    border-right: 1px solid #333333;
+    padding: 0 14px;
     margin: 0;
 }
 
 #workspaces button.focused {
-    color: rgba(30, 255, 30, 0.95);
-    background: rgba(30, 200, 30, 0.15);
-    text-shadow: 0 0 10px rgba(30, 255, 30, 0.6);
+    color: #000000;
+    background: #ff3333;
 }
 
 #workspaces button.urgent {
-    color: rgba(255, 80, 80, 0.9);
-    background: transparent;
-    text-shadow: 0 0 8px rgba(255, 80, 80, 0.5);
+    color: #000000;
+    background: #ffffff;
 }
 
-/* ── Clock: bright phosphor ── */
+/* ── Clock: the one accent ── */
 #clock {
-    color: rgba(30, 255, 30, 0.9);
-    text-shadow: 0 0 12px rgba(30, 255, 30, 0.5);
+    color: #ff3333;
+    border-right: none;
+    border-left: 2px solid #333333;
+    letter-spacing: 1px;
 }
 
-/* ── Separator look: dim pipe chars via border ── */
-#network,
-#pulseaudio,
-#temperature,
-#cpu,
-#memory,
+/* ── Notification with unread ── */
 #custom-notification {
-    border-right: 1px solid rgba(30, 200, 30, 0.15);
+    border-right: none;
 }
 
-/* ── Critical: red phosphor ── */
+/* ── Critical: no animation, just scream ── */
 #temperature.critical {
-    color: rgba(255, 60, 60, 0.9);
-    text-shadow: 0 0 10px rgba(255, 60, 60, 0.5);
+    background: #ff3333;
+    color: #000000;
 }
 
 #battery.charging {
-    color: rgba(30, 255, 30, 0.9);
+    color: #ff3333;
 }
 
 #battery.warning {
-    color: rgba(255, 200, 50, 0.9);
-    text-shadow: 0 0 8px rgba(255, 200, 50, 0.4);
+    background: #ff3333;
+    color: #000000;
 }
 
 #battery.critical {
-    color: rgba(255, 60, 60, 0.9);
-    text-shadow: 0 0 10px rgba(255, 60, 60, 0.5);
+    background: #ff3333;
+    color: #000000;
 }

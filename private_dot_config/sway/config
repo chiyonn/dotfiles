@@ -20,24 +20,16 @@ set $scratchpad_call ~/.config/sway/scripts/scratchpad_firefox.sh
 floating_modifier $mod normal
 
 # gaps
-default_border pixel 2
-gaps inner 2
-gaps outer 2
-
+default_border pixel 3
+gaps inner 0
+gaps outer 0
 
 # colors
-#   palette
-set $cl_high #83a598
-set $cl_indi #928374
-set $cl_back #282828
-set $cl_fore #ebdbb2
-set $cl_urge #fb4934
-
 #                           border   bg       text     indi     childborder
-client.focused          $cl_high $cl_high $cl_fore $cl_indi $cl_high
-client.focused_inactive #3c3836  #3c3836  $cl_fore #3c3836  #3c3836
-client.unfocused        #3c3836  #3c3836  $cl_fore #3c3836  #3c3836
-client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
+client.focused          #ffffff  #ffffff  #000000  #ff3333  #ffffff
+client.focused_inactive #333333  #000000  #ffffff  #333333  #333333
+client.unfocused        #333333  #000000  #ffffff  #333333  #333333
+client.urgent           #ff3333  #ff3333  #000000  #ff3333  #ff3333
 
 
 ### idle control

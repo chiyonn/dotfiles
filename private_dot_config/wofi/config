@@ -1,9 +1,10 @@
 [wofi]
-width=400
-height=500
+width=500
+height=400
 columns=1
 allow_markup=true
 show=drun
-prompt=❯
+prompt=>
 term=foot
+insensitive=true
 
