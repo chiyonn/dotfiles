@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Theme Select
+Comment=Switch sway theme via wofi
+Exec=/home/chiyonn/.config/sway/scripts/theme-select.sh
+Icon=preferences-desktop-theme
+Type=Application
+Categories=Settings;
+Keywords=theme;テーマ;sway;switch;

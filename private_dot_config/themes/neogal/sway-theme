@@ -3,7 +3,7 @@ gaps inner 5
 gaps outer 5
 
 #                           border   bg       text     indi     childborder
-client.focused          #7a5200  #1a1118  #FEE9A0  #DAAF08  #7a5200
+client.focused          #e8a4b8  #1a1118  #FEE9A0  #DAAF08  #e8a4b8
 client.focused_inactive #2a1a24  #1a1118  #f5e6ec  #2a1a24  #2a1a24
 client.unfocused        #2a1a24  #1a1118  #886677  #2a1a24  #2a1a24
 client.urgent           #5c1a30  #e8a4b8  #1a1118  #e8a4b8  #5c1a30
