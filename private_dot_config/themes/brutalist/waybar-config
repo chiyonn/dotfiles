@@ -5,15 +5,14 @@
     "margin-left": 0,
     "margin-right": 0,
     "modules-left": ["sway/workspaces"],
-    "modules-center": [],
+    "modules-center": ["clock"],
     "modules-right": [
         "network",
         "pulseaudio",
         "temperature",
         "cpu",
         "memory",
-        "custom/notification",
-        "clock"
+        "custom/notification"
     ],
     "sway/workspaces": {
         "disable-scroll": false,
