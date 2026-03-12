@@ -1,4 +1,10 @@
 /* ── NEOGAL : Rose Gold ── */
+/* palette:
+ *   bg-dark:    #1a1118    fg:       #1a1118    fg-light: #f5e6ec
+ *   gold-border:#7a5200    gold-mid: #DAAF08    gold-light:#FEE9A0
+ *   rose-dark:  #a0586e    rose-mid: #e8a4b8    rose-light:#f5d0dc
+ *   wine:       #5c1a30    lavender: #c9a0dc
+ */
 window {
     background-color: rgba(26, 17, 24, 0.92);
     border: 2px solid #5c1a30;

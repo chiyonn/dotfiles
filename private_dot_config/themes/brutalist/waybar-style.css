@@ -1,4 +1,10 @@
-/* ── BRUTALIST ── */
+/* ── BRUTALIST : Lackluster ── */
+/* palette:
+ *   bg:      #191919    gray3:  #2a2a2a    gray4:  #444444
+ *   gray5:   #555555    gray6:  #7a7a7a    gray7:  #aaaaaa
+ *   gray8:   #cccccc    gray9:  #DDDDDD    luster: #deeeed
+ *   lack:    #708090    red:    #D70000
+ */
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 15px;
@@ -8,8 +14,8 @@
 }
 
 window#waybar {
-    background: #000000;
-    border-bottom: 3px solid #ffffff;
+    background: #191919;
+    border-bottom: 3px solid #444444;
 }
 
 /* ── All modules ── */
@@ -22,15 +28,15 @@ window#waybar {
 #memory,
 #battery,
 #custom-notification {
-    background: #000000;
-    color: #ffffff;
+    background: #191919;
+    color: #aaaaaa;
     border-radius: 0;
-    border-right: 2px solid #333333;
+    border-right: 2px solid #2a2a2a;
     padding: 0 16px;
     margin: 0;
 }
 
-/* ── Hover: instant flip ── */
+/* ── Hover: slate flip ── */
 #network:hover,
 #pulseaudio:hover,
 #temperature:hover,
@@ -38,8 +44,8 @@ window#waybar {
 #memory:hover,
 #battery:hover,
 #custom-notification:hover {
-    background: #ffffff;
-    color: #000000;
+    background: #708090;
+    color: #191919;
 }
 
 /* ── Workspaces ── */
@@ -49,28 +55,28 @@ window#waybar {
 
 #workspaces button {
     color: #555555;
-    background: #000000;
+    background: #191919;
     border-radius: 0;
-    border-right: 1px solid #333333;
+    border-right: 1px solid #2a2a2a;
     padding: 0 14px;
     margin: 0;
 }
 
 #workspaces button.focused {
-    color: #000000;
-    background: #ff3333;
+    color: #191919;
+    background: #708090;
 }
 
 #workspaces button.urgent {
-    color: #000000;
-    background: #ffffff;
+    color: #191919;
+    background: #D70000;
 }
 
 /* ── Clock: the one accent ── */
 #clock {
-    color: #ff3333;
+    color: #deeeed;
     border-right: none;
-    border-left: 2px solid #333333;
+    border-left: 2px solid #2a2a2a;
     letter-spacing: 1px;
 }
 
@@ -81,20 +87,20 @@ window#waybar {
 
 /* ── Critical: no animation, just scream ── */
 #temperature.critical {
-    background: #ff3333;
-    color: #000000;
+    background: #D70000;
+    color: #191919;
 }
 
 #battery.charging {
-    color: #ff3333;
+    color: #789978;
 }
 
 #battery.warning {
-    background: #ff3333;
-    color: #000000;
+    background: #ffaa88;
+    color: #191919;
 }
 
 #battery.critical {
-    background: #ff3333;
-    color: #000000;
+    background: #D70000;
+    color: #191919;
 }

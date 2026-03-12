@@ -1,9 +1,11 @@
-/* ── BRUTALIST ── */
-@define-color bg #000000;
-@define-color fg #ffffff;
-@define-color border #333333;
-@define-color accent #ff3333;
+/* ── BRUTALIST : Lackluster ── */
+@define-color bg #191919;
+@define-color fg #DDDDDD;
+@define-color border #444444;
+@define-color accent #708090;
 @define-color dim #555555;
+@define-color red #D70000;
+@define-color luster #deeeed;
 
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
@@ -31,13 +33,13 @@
 
 .notification-row .notification-background .notification {
     border-radius: 0;
-    border: 2px solid @fg;
+    border: 2px solid @border;
     padding: 0;
     background: @bg;
 }
 
 .notification-row .notification-background .close-button {
-    background: @fg;
+    background: @accent;
     color: @bg;
     text-shadow: none;
     padding: 0;
@@ -51,7 +53,7 @@
 }
 
 .notification-row .notification-background .close-button:hover {
-    background: @accent;
+    background: @red;
     color: @bg;
     box-shadow: none;
     border: none;
@@ -69,7 +71,7 @@
 
 .notification-row .notification-background .notification .notification-default-action:hover,
 .notification-row .notification-background .notification .notification-action:hover {
-    background: @fg;
+    background: @accent;
     color: @bg;
 }
 
@@ -97,7 +99,7 @@
 .notification-row .notification-background .notification .notification-content .text-box .summary {
     font-size: 14px;
     font-weight: 900;
-    color: @accent;
+    color: @luster;
     background: transparent;
     text-shadow: none;
 }
@@ -138,7 +140,7 @@
     background: @bg;
     color: @fg;
     border-radius: 0;
-    border: 3px solid @fg;
+    border: 3px solid @border;
 }
 
 .control-center .control-center-list-placeholder {
@@ -169,7 +171,7 @@
     font-size: initial;
     color: @bg;
     text-shadow: none;
-    background: @fg;
+    background: @accent;
     border: none;
     box-shadow: none;
     border-radius: 0;
@@ -177,7 +179,7 @@
 }
 
 .widget-title > button:hover {
-    background: @accent;
+    background: @red;
     color: @bg;
 }
 
@@ -193,7 +195,7 @@
     font-size: initial;
     border-radius: 0;
     background: @border;
-    border: 2px solid @fg;
+    border: 2px solid @accent;
     box-shadow: none;
 }
 
@@ -202,6 +204,6 @@
 }
 
 .widget-dnd > switch slider {
-    background: @fg;
+    background: @luster;
     border-radius: 0;
 }

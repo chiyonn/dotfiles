@@ -2,16 +2,18 @@
 @define-color bg rgba(26, 17, 24, 0.92);
 @define-color fg #1a1118;
 @define-color fg-light #f5e6ec;
-@define-color gold-dark #B67B03;
+@define-color gold-border #7a5200;
 @define-color gold-mid #DAAF08;
 @define-color gold-light #FEE9A0;
 @define-color rose-dark #a0586e;
 @define-color rose-mid #e8a4b8;
 @define-color rose-light #f5d0dc;
+@define-color rose-bg rgba(252, 232, 239, 0.95);
+@define-color wine #5c1a30;
 @define-color lavender #c9a0dc;
 
 * {
-    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-family: "Comfortaa", "JetBrainsMono Nerd Font", sans-serif;
     font-size: 13px;
     font-weight: 700;
 }
@@ -35,13 +37,13 @@
 
 .notification-row .notification-background .notification {
     border-radius: 16px;
-    border: 2px solid @gold-dark;
+    border: 2px solid @gold-border;
     padding: 0;
-    background: rgba(252, 232, 239, 0.95);
+    background: @rose-bg;
 }
 
 .notification-row .notification-background .close-button {
-    background-image: linear-gradient(45deg, #a0586e 0%, #e8a4b8 50%, #a0586e 100%);
+    background-image: linear-gradient(45deg, @rose-dark 0%, @rose-mid 50%, @rose-dark 100%);
     color: @fg;
     text-shadow: none;
     padding: 0;
@@ -49,13 +51,13 @@
     margin-top: 5px;
     margin-right: 5px;
     box-shadow: none;
-    border: 2px solid @rose-dark;
+    border: 2px solid @wine;
     min-width: 20px;
     min-height: 20px;
 }
 
 .notification-row .notification-background .close-button:hover {
-    background-image: linear-gradient(45deg, #e8a4b8 0%, #f5d0dc 50%, #e8a4b8 100%);
+    background-image: linear-gradient(45deg, @rose-mid 0%, @rose-light 50%, @rose-mid 100%);
     color: @fg;
     box-shadow: none;
 }
@@ -73,7 +75,7 @@
 
 .notification-row .notification-background .notification .notification-default-action:hover,
 .notification-row .notification-background .notification .notification-action:hover {
-    background: rgba(254, 233, 160, 0.3);
+    background: alpha(@gold-light, 0.3);
 }
 
 .notification-row .notification-background .notification .notification-default-action {
@@ -107,7 +109,7 @@
 
 .notification-row .notification-background .notification .notification-content .text-box .time {
     font-size: 11px;
-    color: #6b5a10;
+    color: @gold-border;
     background: transparent;
     text-shadow: none;
     margin-right: 20px;
@@ -116,15 +118,15 @@
 .notification-row .notification-background .notification .notification-content .text-box .body {
     font-size: 13px;
     font-weight: 400;
-    color: #3a2a08;
+    color: @fg;
     background: transparent;
     text-shadow: none;
 }
 
 .notification-row .notification-background .notification .notification-action {
-    border-top: 1px solid rgba(182, 123, 3, 0.3);
+    border-top: 1px solid alpha(@gold-border, 0.3);
     border-radius: 0;
-    border-right: 1px solid rgba(182, 123, 3, 0.3);
+    border-right: 1px solid alpha(@gold-border, 0.3);
 }
 
 .notification-row .notification-background .notification .notification-action:first-child {
@@ -141,7 +143,7 @@
     background: rgba(245, 208, 220, 0.95);
     color: @fg;
     border-radius: 18px;
-    border: 2px solid @gold-dark;
+    border: 2px solid @gold-border;
 }
 
 .control-center .control-center-list-placeholder {
@@ -172,8 +174,8 @@
     font-size: initial;
     color: @fg;
     text-shadow: none;
-    background-image: linear-gradient(45deg, #a0586e 0%, #e8a4b8 40%, #f5d0dc 65%, #e8a4b8 80%, #a0586e 100%);
-    border: 2px solid @rose-dark;
+    background-image: linear-gradient(45deg, @rose-dark 0%, @rose-mid 40%, @rose-light 65%, @rose-mid 80%, @rose-dark 100%);
+    border: 2px solid @wine;
     box-shadow: none;
     border-radius: 12px;
     font-weight: 900;
@@ -181,7 +183,7 @@
 }
 
 .widget-title > button:hover {
-    background-image: linear-gradient(45deg, #e8a4b8 0%, #f5d0dc 50%, #e8a4b8 100%);
+    background-image: linear-gradient(45deg, @rose-mid 0%, @rose-light 50%, @rose-mid 100%);
     color: @fg;
 }
 
@@ -195,17 +197,17 @@
 .widget-dnd > switch {
     font-size: initial;
     border-radius: 12px;
-    background: rgba(182, 123, 3, 0.2);
-    border: 1px solid @gold-dark;
+    background: alpha(@gold-border, 0.2);
+    border: 1px solid @gold-border;
     box-shadow: none;
     transition: background 0.2s ease;
 }
 
 .widget-dnd > switch:checked {
-    background-image: linear-gradient(45deg, #a0586e 0%, #e8a4b8 50%, #a0586e 100%);
+    background-image: linear-gradient(45deg, @rose-dark 0%, @rose-mid 50%, @rose-dark 100%);
 }
 
 .widget-dnd > switch slider {
-    background-image: linear-gradient(45deg, #B67B03 0%, #FEE9A0 50%, #B67B03 100%);
+    background-image: linear-gradient(45deg, @gold-border 0%, @gold-light 50%, @gold-border 100%);
     border-radius: 12px;
 }
