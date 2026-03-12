@@ -25,8 +25,4 @@ if [[ "$theme" == "$CURRENT" ]]; then
     exit 0
 fi
 
-if "$HOME/.config/sway/scripts/theme-switch.sh" "$theme"; then
-    notify-send "Theme" "Switched to: $theme"
-else
-    notify-send -u critical "Theme" "Failed to switch: $theme"
-fi
+"$HOME/.config/sway/scripts/theme-switch.sh" "$theme" || notify-send -u critical "Theme" "Failed to switch: $theme"

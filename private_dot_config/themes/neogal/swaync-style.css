@@ -37,7 +37,7 @@
     border-radius: 16px;
     border: 2px solid @gold-dark;
     padding: 0;
-    background: rgba(232, 164, 184, 0.95);
+    background: rgba(252, 232, 239, 0.95);
 }
 
 .notification-row .notification-background .close-button {

@@ -82,4 +82,5 @@ pkill swaync 2>/dev/null; sleep 0.2; swaync &disown
 fcitx5 -r -d 2>/dev/null
 swaymsg reload 2>/dev/null
 
+notify-send "Theme" "Switched to $THEME" 2>/dev/null
 echo "switched to: $THEME"
