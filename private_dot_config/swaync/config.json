@@ -34,12 +34,12 @@
   ],
   "widget-config": {
     "title": {
-      "text": "♡ notifications ♡",
+      "text": "Notifications",
       "clear-all-button": true,
-      "button-text": "bye bye~"
+      "button-text": "Clear"
     },
     "dnd": {
-      "text": "shh mode ♡"
+      "text": "Do Not Disturb"
     }
   }
 }

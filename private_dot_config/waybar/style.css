@@ -1,18 +1,24 @@
-/* ── NEOGAL ── */
+/* ── BRUTALIST : Lackluster ── */
+/* palette:
+ *   bg:      #191919    gray3:  #2a2a2a    gray4:  #444444
+ *   gray5:   #555555    gray6:  #7a7a7a    gray7:  #aaaaaa
+ *   gray8:   #cccccc    gray9:  #DDDDDD    luster: #deeeed
+ *   lack:    #708090    red:    #D70000
+ */
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     border: none;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(20, 0, 30, 0.88);
-    border-bottom: 2px solid #ff36ab;
+    background: #191919;
+    border-bottom: 3px solid #444444;
 }
 
-/* ── Pill modules ── */
+/* ── All modules ── */
 #workspaces,
 #clock,
 #network,
@@ -22,16 +28,15 @@ window#waybar {
 #memory,
 #battery,
 #custom-notification {
-    background: rgba(255, 54, 171, 0.1);
-    border: 1px solid rgba(255, 54, 171, 0.25);
-    border-radius: 20px;
-    padding: 2px 14px;
-    margin: 4px 2px;
-    color: #ffb8e6;
-    transition: all 0.3s ease;
+    background: #191919;
+    color: #aaaaaa;
+    border-radius: 0;
+    border-right: 2px solid #2a2a2a;
+    padding: 0 16px;
+    margin: 0;
 }
 
-/* ── Hover: pop ── */
+/* ── Hover: slate flip ── */
 #network:hover,
 #pulseaudio:hover,
 #temperature:hover,
@@ -39,69 +44,63 @@ window#waybar {
 #memory:hover,
 #battery:hover,
 #custom-notification:hover {
-    background: #ff36ab;
-    color: #1a0020;
-    border-color: #ff36ab;
+    background: #708090;
+    color: #191919;
 }
 
 /* ── Workspaces ── */
 #workspaces {
-    padding: 2px 4px;
-    background: rgba(255, 54, 171, 0.06);
-    border-color: rgba(255, 54, 171, 0.15);
+    padding: 0;
 }
 
 #workspaces button {
-    color: rgba(255, 184, 230, 0.35);
-    background: transparent;
-    border-radius: 14px;
-    padding: 1px 10px;
-    margin: 2px;
-    transition: all 0.3s ease;
+    color: #555555;
+    background: #191919;
+    border-radius: 0;
+    border-right: 1px solid #2a2a2a;
+    padding: 0 14px;
+    margin: 0;
 }
 
 #workspaces button.focused {
-    color: #1a0020;
-    background: #ff36ab;
+    color: #191919;
+    background: #708090;
 }
 
 #workspaces button.urgent {
-    color: #1a0020;
-    background: #ffe156;
+    color: #191919;
+    background: #D70000;
 }
 
-/* ── Clock: neon highlight ── */
+/* ── Clock: the one accent ── */
 #clock {
-    color: #ffe156;
-    background: rgba(255, 225, 86, 0.1);
-    border-color: rgba(255, 225, 86, 0.3);
-    letter-spacing: 0.5px;
+    color: #deeeed;
+    border-right: none;
+    border-left: 2px solid #2a2a2a;
+    letter-spacing: 1px;
 }
 
-/* ── Notification ── */
+/* ── Notification with unread ── */
 #custom-notification {
-    color: #b4f8c8;
+    border-right: none;
 }
 
-/* ── Status ── */
+/* ── Critical: no animation, just scream ── */
 #temperature.critical {
-    background: #ff36ab;
-    color: #1a0020;
-    border-color: #ff36ab;
+    background: #D70000;
+    color: #191919;
 }
 
 #battery.charging {
-    color: #b4f8c8;
+    color: #789978;
 }
 
 #battery.warning {
-    color: #ffe156;
-    background: rgba(255, 225, 86, 0.15);
-    border-color: rgba(255, 225, 86, 0.3);
+    background: #ffaa88;
+    color: #191919;
 }
 
 #battery.critical {
-    background: #ff36ab;
-    color: #1a0020;
-    border-color: #ff36ab;
+    background: #D70000;
+    color: #191919;
 }
