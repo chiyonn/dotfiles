@@ -47,3 +47,6 @@ alias tree='tree -I node_modules -I __pycache__'
 # alias reboot='systemctl soft-reboot'
 # Kernel module state persistence across soft-reboot causes hardware issues (e.g. bluetooth)
 # Module Reload also solve this but use nomal reboot is acceptable.
+
+# Transcription practice
+alias pierre='mpv --vf=hflip --speed=0.5 ~/Videos/Pierre\ Danel\ -\ Spacey\ Fusion\ Jam\ in\ C#\ Minor.mp4'
