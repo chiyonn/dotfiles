@@ -193,6 +193,13 @@ def upload_images(image_paths: list[str]) -> bool:
             print(f"    upload fail: {os.path.basename(path)}: {output[:80]}")
             return False
         time.sleep(1)
+
+        # AI出品サポートのモーダルが出ていたらDOMごと削除
+        # Close→保存せずに戻るはフォームリセットされるため使わない
+        snap = snapshot()
+        if 'dialog' in snap.lower() and '出品画像' in snap:
+            run_cli("eval", "() => (document.getElementById('ds-portal-wrapper') || document.querySelector('[role=dialog]')?.closest('[id*=portal], [class*=portal], [class*=overlay]') || document.querySelector('[role=dialog]'))?.remove()")
+            time.sleep(0.5)
     return True
 
 
@@ -379,6 +386,8 @@ def list_one(product: Product) -> bool:
             time.sleep(0.5)
 
     # --- 画像アップロード ---
+    run_cli("press", "Home")
+    time.sleep(0.3)
     images = get_image_paths(product)
     if not images:
         print(f"  SKIP: 画像なし ({_image_dir_id(product)})")
@@ -410,6 +419,8 @@ def list_one(product: Product) -> bool:
         return False
 
     # --- カテゴリ ---
+    run_cli("press", "Home")
+    time.sleep(0.3)
     if not select_category(product.category):
         print("  FAIL: カテゴリ選択")
         return False
