@@ -46,20 +46,6 @@ fi
 # sway colors
 cp "$SRC/sway-theme" "$HOME/.config/sway/config.d/theme"
 
-# foot colors
-{
-    echo "[colors]"
-    cat "$SRC/foot-colors"
-} > /tmp/foot-colors-new
-# replace [colors] section in foot.ini
-sed -i '/^\[colors\]/,$d' "$HOME/.config/foot/foot.ini"
-cat /tmp/foot-colors-new >> "$HOME/.config/foot/foot.ini"
-rm -f /tmp/foot-colors-new
-
-# nvim colorscheme
-if [ -f "$SRC/nvim-theme" ]; then
-    cp "$SRC/nvim-theme" "$HOME/.config/nvim/theme"
-fi
 
 # fcitx5 theme
 if [ -f "$SRC/fcitx5-theme" ]; then
