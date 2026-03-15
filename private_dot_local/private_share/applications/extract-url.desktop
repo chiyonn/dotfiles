@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Extract URL
+Comment=Extract URL from clipboard text
+Exec=/home/chiyonn/.config/sway/scripts/extract_url.sh --clip
+Icon=edit-copy
+Type=Application
+Categories=Utility;
+Keywords=url;link;extract;clipboard;リンク;
