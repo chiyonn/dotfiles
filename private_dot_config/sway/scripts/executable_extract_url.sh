@@ -17,21 +17,21 @@ extract_url_join() {
 }
 
 notify() {
-  notify-send -a "extract-url" "$1" "$2"
+  notify-send -a "extract-url" "$@"
 }
 
 if [[ "$1" == "--clip" ]]; then
   input=$(wl-paste 2>/dev/null)
   if [[ -z "$input" ]]; then
-    notify "Extract URL" "Clipboard is empty"
+    notify -u critical "Extract URL" "Clipboard is empty"
     exit 1
   fi
   url=$(echo "$input" | extract_url_join)
   if [[ -n "$url" ]]; then
     echo -n "$url" | wl-copy
-    notify "URL extracted" "$url"
+    notify -u low "URL extracted" "$url"
   else
-    notify "Extract URL" "No URL found"
+    notify -u critical "Extract URL" "No URL found"
     exit 1
   fi
 elif [[ "$1" == "--join" ]]; then
