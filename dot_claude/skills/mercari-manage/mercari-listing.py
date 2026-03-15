@@ -54,11 +54,15 @@ class Product:
     notes: str
 
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 def run_cli(*args: str, timeout: int = 30) -> tuple[bool, str]:
     """Playwright CLIコマンドを実行する。
 
     exit codeは信頼できない（エラーでも0を返す場合がある）ため、
     出力に "Error" が含まれるかどうかでも判定する。
+    CWDをスクリプトディレクトリに固定し、.playwright-cli/の保存先を統一する。
     """
     result = subprocess.run(
         ["npx", "@playwright/cli", *args],
@@ -75,11 +79,17 @@ def run_cli(*args: str, timeout: int = 30) -> tuple[bool, str]:
 def snapshot() -> str:
     """スナップショットを取得して内容を返す（CLI出力 + YAMLファイル）"""
     _, output = run_cli("snapshot")
-    snapshots = sorted(glob.glob(".playwright-cli/page-*.yml"))
-    if not snapshots:
-        return output
-    with open(snapshots[-1], "r") as f:
-        return output + "\n" + f.read()
+    # CLI出力からYAMLファイルパスを抽出（ブラウザ起動CWDに依存するため動的に取得）
+    match = re.search(r'\[Snapshot\]\(([^)]+\.yml)\)', output)
+    if match:
+        yml_path = match.group(1)
+        # 相対パスの場合はSCRIPT_DIRからの解決を試みる
+        if not os.path.isabs(yml_path):
+            yml_path = os.path.normpath(os.path.join(SCRIPT_DIR, yml_path))
+        if os.path.exists(yml_path):
+            with open(yml_path, "r") as f:
+                return output + "\n" + f.read()
+    return output
 
 
 def find_ref(content: str, pattern: str) -> str | None:
@@ -158,7 +168,11 @@ def get_image_paths(product: Product) -> list[str]:
 
 
 def _ensure_assets_symlink() -> str:
-    """CWD配下にsymlinkを作成し、そのパスを返す"""
+    """CWD配下にsymlinkを作成し、そのパスを返す
+
+    Playwright CLIのallowed rootはブラウザ起動時のCWD。
+    スクリプトもそのCWDから実行する前提。
+    """
     symlink_path = os.path.join(os.getcwd(), ASSETS_SYMLINK_NAME)
     if not os.path.exists(symlink_path):
         os.symlink(ASSETS_DIR, symlink_path)
