@@ -12,10 +12,13 @@ Usage:
 """
 
 import glob
+import os
 import re
 import subprocess
 import sys
 import time
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def run_cli(*args: str, timeout: int = 90) -> tuple[bool, str]:
@@ -34,12 +37,17 @@ def run_cli(*args: str, timeout: int = 90) -> tuple[bool, str]:
 
 def snapshot_content() -> str:
     """最新のスナップショットを取得して内容を返す"""
-    run_cli("snapshot")
-    snapshots = sorted(glob.glob(".playwright-cli/page-*.yml"))
-    if not snapshots:
-        return ""
-    with open(snapshots[-1], "r") as f:
-        return f.read()
+    _, output = run_cli("snapshot")
+    # CLI出力からYAMLファイルパスを動的に取得
+    match = re.search(r'\[Snapshot\]\(([^)]+\.yml)\)', output)
+    if match:
+        yml_path = match.group(1)
+        if not os.path.isabs(yml_path):
+            yml_path = os.path.normpath(os.path.join(SCRIPT_DIR, yml_path))
+        if os.path.exists(yml_path):
+            with open(yml_path, "r") as f:
+                return f.read()
+    return output
 
 
 def find_ref(content: str, pattern: str) -> str | None:
