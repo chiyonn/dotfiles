@@ -70,5 +70,5 @@
 # -> see config.d/workspace
 
 # function keys
-    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+    bindsym XF86MonBrightnessDown exec ddcutil setvcp 10 - 10 && pkill -SIGRTMIN+1 waybar
+    bindsym XF86MonBrightnessUp exec ddcutil setvcp 10 + 10 && pkill -SIGRTMIN+1 waybar
