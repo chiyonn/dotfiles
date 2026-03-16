@@ -7,13 +7,13 @@ description: |
 
 # メルカリ出品管理
 
-## スクリプト一覧
+## スクリプト構成
 
-| スクリプト | 用途 |
-|-----------|------|
-| `mercari-listing.py` | CSVから商品を自動出品 |
-| `mercari-cleanup.py` | 古い出品を自動削除 |
-| `fetch-images.py` | 既存出品から商品画像を収集 |
+| ファイル | 役割 |
+|----------|------|
+| `base.py` | `PlaywrightClient` — CLI操作の共通基盤 |
+| `mercari-listing.py` | `MercariLister` — CSVから商品を自動出品 |
+| `mercari-cleanup.py` | `MercariCleaner` — 古い出品を自動削除 |
 
 ## 共通の前提条件
 
@@ -51,19 +51,11 @@ python3 -u ~/.claude/skills/mercari-manage/mercari-cleanup.py
 - 出品一覧ページで「もっと見る」を繰り返しクリックして全件読み込み
 - 更新日が14日以上前 or 「か月」表記の商品を自動削除
 
-## 画像収集 (fetch-images.py)
-
-```bash
-python3 -u ~/.claude/skills/mercari-manage/fetch-images.py
-```
-
-- 既存出品の商品画像をダウンロードして `assets/{ASIN}/` に保存
-
 ## 重要な技術的注意
 
 - **`eval` コマンドは使わない** — `page.evaluate()` にマッピングされるため Playwright API が動かない。しかも exit code 0 を返すのでエラー検出も困難
 - すべて `snapshot` → ref ID → `click`/`fill`/`select`/`upload` コマンドで操作する
-- `run_cli` の成否判定は exit code + 出力の `### Error` チェックの両方で行う
+- `PlaywrightClient.run()` の成否判定は exit code + 出力の `### Error` チェックの両方で行う
 
 ## ブラウザを閉じる
 

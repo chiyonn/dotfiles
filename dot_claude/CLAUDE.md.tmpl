@@ -15,6 +15,10 @@
   - 管理下の場合は `~/.local/share/chezmoi` 内の対応するsourceファイルを編集すること
   - 直接ホームディレクトリのファイルを編集すると `chezmoi apply` で上書きされる
 
+## Python CLIツール
+- グローバルなPython CLIツールは `uv tool install` で入れること（`pip install` は使わない）
+- OS環境を汚さず `~/.local/share/uv/tools/` に隔離される
+
 ## Playwright CLI
 - ブラウザ操作には MCP プラグインではなく `@playwright/cli` を使うこと
 - 基本フロー: `npx @playwright/cli snapshot` → ref取得 → `click`/`fill` 等で操作

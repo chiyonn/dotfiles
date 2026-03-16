@@ -5,3 +5,6 @@
 # Note: NOMAD_ADDR is in exports.zsh (not secret)
 export NOMAD_TOKEN="your-nomad-admin-token-here"
 export VAULT_ADDR=http://192.168.40.104:8200
+
+# Mercari automation
+export MERCARI_SPREADSHEET_ID="your-spreadsheet-id-here"

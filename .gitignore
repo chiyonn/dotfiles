@@ -1,2 +1,3 @@
 .playwright-cli/
 .mercari-assets
+dot_claude/skills/mercari-manage/__pycache__/
