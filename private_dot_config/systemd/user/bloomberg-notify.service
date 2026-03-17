@@ -1,0 +1,12 @@
+[Unit]
+Description=Bloomberg headline notification
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/sway/scripts/bloomberg_notify.sh
+Environment=DISPLAY=:0
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/bus
+Environment=PULSE_SERVER=unix:/run/user/%U/pulse/native
+Environment=XDG_RUNTIME_DIR=/run/user/%U
