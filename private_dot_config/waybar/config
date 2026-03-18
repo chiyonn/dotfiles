@@ -76,7 +76,7 @@
     },
     "clock": {
         "tooltip": false,
-        "format": "{:%m/%d %H:%M}",
+        "format": "{:%a %m/%d %H:%M}",
         "interval": 1
     }
 }
