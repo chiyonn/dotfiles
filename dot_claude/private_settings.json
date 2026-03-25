@@ -13,6 +13,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v chezmoi >/dev/null && chezmoi re-add ~/.claude/settings.json 2>/dev/null || true"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
