@@ -36,12 +36,22 @@ gh project item-edit --id "$DRAFT_ID" --format json
 ```
 初回や内容が空の場合はスキップしてOK。
 
-## 進行ルール
+## 進行方式
+
+朝会はインタラクティブな対話形式で進行する。
+
+1. **冒頭でアジェンダを提示する** — 今日話す項目の一覧を最初に見せる
+2. **1ステップずつ進行する** — 各フェーズで問いかけ、ユーザーの回答を待ってから次へ進む
+3. **深掘りしてから次へ進む** — 「できなかった」で終わらせず「なぜ？」「どうする？」まで掘る
+4. **まとめて出力しない** — 全情報を一度に出すのは禁止。必ずターンを渡す
+
+## その他の進行ルール
 
 - **5分上限**。完璧なプランより「決まってる」が大事
 - ユーザーが脱線したらフォーカスアンカーとして機能する
 - タスクは **最大3つ** に絞る。全部やろうとしない
 - 「やらない」も立派な決定として尊重する
+- **Issue作成時は必ず GitHub Projects (ID:6) にも追加する**（`gh project item-add 6 --owner @me --url <issue-url>`）
 
 ## Discord 投稿
 
@@ -54,7 +64,7 @@ curl -H "Content-Type: application/json" \
   "$DISCORD_MEETING_WEBHOOK"
 ```
 
-環境変数 `DISCORD_MEETING_WEBHOOK` は settings.local.json で設定済み。
+環境変数 `DISCORD_MEETING_WEBHOOK` は `~/.zshenv` に格納されている。Bashツール経由で参照可能。
 
 ### ペイロード構成
 ```json
