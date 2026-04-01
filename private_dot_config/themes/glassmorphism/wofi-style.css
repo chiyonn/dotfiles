@@ -1,19 +1,39 @@
 /* ── GLASSMORPHISM ── */
+
+* {
+    outline: none;
+}
+
 window {
-    background-color: rgba(26, 26, 46, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+        180deg,
+        rgba(30, 30, 45, 0.8) 0%,
+        rgba(20, 20, 35, 0.65) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 16px;
     padding: 8px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 #input {
     margin: 4px;
     padding: 8px 12px;
-    border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
     border-radius: 10px;
     color: rgba(255, 255, 255, 0.85);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 #inner-box, #outer-box, #scroll, #text {
@@ -25,11 +45,20 @@ window {
     padding: 6px 12px;
     margin: 2px 4px;
     border-radius: 10px;
-    background-color: transparent;
+    background: transparent;
     color: rgba(255, 255, 255, 0.75);
+    transition: all 0.3s ease;
 }
 
 #entry:selected {
-    background-color: rgba(255, 255, 255, 0.12);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.08) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: #ffffff;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }

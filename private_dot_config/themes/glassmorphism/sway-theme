@@ -1,4 +1,5 @@
 default_border pixel 2
+corner_radius 8
 gaps inner 6
 gaps outer 8
 
