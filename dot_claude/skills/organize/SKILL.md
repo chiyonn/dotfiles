@@ -11,48 +11,25 @@ description: |
 
 ## 実行手順
 
-### Step 1: ルールの読み込み
+### Step 1: 定常クリーンアップの実行
 
-このスキルと同じディレクトリにある `rules.yaml` を Read ツールで読み込む。
-パス: `~/.claude/skills/organize/rules.yaml`
-
-### Step 2: ファイル一覧の取得
+まず `auto-clean.sh` を実行して、確認不要な定常処理を一括で片付ける。
 
 ```bash
-ls -la ~/Downloads/
+bash ~/.claude/skills/organize/auto-clean.sh
 ```
 
-隠しファイル（.で始まるもの）と `docs/` ディレクトリは除外する。
+このスクリプトは以下を自動実行し、JSON で結果を返す:
+- rules.yaml の `action: delete` ルールに該当するファイルを削除
+- rules.yaml の `action: move`（画像→~/Pictures）を実行
+- 対話が必要なファイル・未マッチファイルを `remaining` リストとして返す
 
-### Step 3: ルール評価
+### Step 2: 残りファイルの対話処理
 
-各ファイル/ディレクトリに対して、rules.yaml のルールを**上から順に**評価する。
-最初にマッチしたルールを適用する。
+Step 1 の `remaining` にファイルがある場合のみ、以下を行う。
 
-**マッチング条件:**
-- `extension`: ファイルの拡張子がリスト内のいずれかに一致
-- `pattern`: ファイル名がglobパターンに一致（`*`はワイルドカード、`{a,b}`はOR）
-- `include_dirs: true` の場合、ディレクトリもマッチ対象
-
-### Step 4: アクション実行
-
-#### action: delete
-```bash
-rm "ファイルパス"           # ファイルの場合
-rm -rf "ディレクトリパス"    # ディレクトリの場合
-```
-確認なしで即座に削除する。
-
-#### action: move
-```bash
-mkdir -p "移動先ディレクトリ"
-mv "ファイルパス" "移動先ディレクトリ/"
-```
-移動先が存在しなければ自動作成。
-
-#### action: move_and_rename
+#### mp3 ファイル（move_and_rename）
 1. ファイル名からメタデータを推測する
-   - mp3の場合: ファイル名からアーティスト名と曲名を推測
    - `ytmp3free.cc_` や `-youtubemp3free.org` などのゴミを除去
    - ハイフン区切りをスペースに、各単語をタイトルケースに
 2. 推測結果をユーザーに AskUserQuestion で確認
@@ -60,22 +37,21 @@ mv "ファイルパス" "移動先ディレクトリ/"
    - ユーザーが修正した場合はその名前を使う
 3. リネーム+移動を実行
 ```bash
-mkdir -p "移動先ディレクトリ"
-mv "元ファイルパス" "移動先ディレクトリ/リネーム後ファイル名"
+mkdir -p ~/Documents/"REAPER Media"/reference
+mv "元ファイルパス" ~/Documents/"REAPER Media"/reference/"リネーム後ファイル名"
 ```
 
-#### action: ask
+#### 動画ファイル（ask）
 AskUserQuestion でユーザーに質問する。選択肢:
 - **移動**: 移動先パスを指定してもらう
 - **削除**: rm する
 - **放置**: 何もしない（今回はスキップ）
 
-### Step 5: 未マッチファイルの処理
+#### その他の未マッチファイル（ask）
+上記と同じく AskUserQuestion で個別に確認する。
+似たファイルが複数ある場合はまとめて1つの質問にしてよい。
 
-`unmatched_policy: ask` の場合、どのルールにもマッチしなかったファイルに対して
-Step 4 の `action: ask` と同じ処理を行う。
-
-### Step 6: サマリー表示
+### Step 3: サマリー表示
 
 処理完了後、結果をまとめて表示する:
 
@@ -84,29 +60,36 @@ Step 4 の `action: ask` と同じ処理を行う。
 
 | アクション | ファイル | 詳細 |
 |-----------|---------|------|
-| 削除 | tasmate-prod-xxx.dump | ルール: delete_tasmate_dumps |
-| 移動 | screenshot.png → ~/Pictures/ | ルール: images_to_pictures |
-| リネーム+移動 | ytmp3... → Guthrie Govan - Waves.mp3 | ルール: mp3_to_reaper_reference |
-| スキップ | something.pdf | ユーザー判断: 放置 |
+| 削除 | tasmate-prod-xxx.dump | auto-clean.sh |
+| 移動 | screenshot.png → ~/Pictures/ | auto-clean.sh |
+| リネーム+移動 | ytmp3... → Guthrie Govan - Waves.mp3 | 対話確認 |
+| スキップ | something.txt | ユーザー判断: 放置 |
 
-削除: N件 / 移動: N件 / スキップ: N件 / 残り: N件
+auto-clean: 削除N件, 移動N件 / 対話処理: N件 / 残り: N件
 ```
 
-### Step 7: ルール学習の提案
+### Step 4: ルール学習の提案
 
-Step 4-5 で ask した結果、パターンが見えた場合（例: .pdf は全部削除した等）、
-rules.yaml への新規ルール追加を提案する。
+Step 2 で ask した結果、パターンが見えた場合（例: .csv は全部削除した等）、
+rules.yaml **および** auto-clean.sh への新規ルール追加を提案する。
 
-提案例:
-> 「.pdfファイルを全部削除したね。今後も .pdf は自動削除するルールを追加する？」
+ユーザーが承認したら、両方を更新する。
 
-ユーザーが承認したら、rules.yaml に新しいルールを追記する。
+## ファイル構成
+
+| ファイル | 役割 |
+|---------|------|
+| `SKILL.md` | スキル定義（このファイル） |
+| `rules.yaml` | ルール定義（信頼できるソース） |
+| `auto-clean.sh` | 定常処理スクリプト（rules.yamlの delete/move を実装） |
+
+**重要**: rules.yaml にルールを追加したら auto-clean.sh にも対応する case を追加すること。
 
 ## ルール追加方法
 
-ユーザーが新しいルールを追加したい場合、rules.yaml を Edit ツールで編集する。
-ルールの書き方:
+ユーザーが新しいルールを追加したい場合:
 
+1. rules.yaml を Edit ツールで編集:
 ```yaml
 - name: ルール名（英数字とアンダースコア）
   match:
@@ -117,3 +100,5 @@ rules.yaml への新規ルール追加を提案する。
   destination: ~/移動先パス   # move/move_and_rename時のみ
   include_dirs: true          # ディレクトリも対象にする場合
 ```
+
+2. action が delete または move の場合、auto-clean.sh にも対応する case を追加する。

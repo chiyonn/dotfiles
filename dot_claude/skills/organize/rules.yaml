@@ -29,6 +29,21 @@ rules:
       pattern: "*{baibai,デビットカード}*"
     action: delete
 
+  - name: delete_business_pdf
+    match:
+      pattern: "202*-D{ICH,NP}-*.pdf"
+    action: delete
+
+  - name: delete_license_cert_pdf
+    match:
+      pattern: "*license cert*.pdf"
+    action: delete
+
+  - name: delete_estimate_pdf
+    match:
+      pattern: "*御見積書*.pdf"
+    action: delete
+
   # === 自動移動 ===
   - name: images_to_pictures
     match:
