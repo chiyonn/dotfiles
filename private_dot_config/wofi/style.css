@@ -1,22 +1,39 @@
-/* ── BRUTALIST : Lackluster ── */
-/* palette:
- *   bg: #191919  border: #444444  accent: #708090
- *   fg: #DDDDDD  dim:    #555555  luster: #deeeed
- */
+/* ── GLASSMORPHISM ── */
+
+* {
+    outline: none;
+}
+
 window {
-    background-color: #191919;
-    border: 3px solid #444444;
-    border-radius: 0;
-    padding: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(30, 30, 45, 0.8) 0%,
+        rgba(20, 20, 35, 0.65) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 8px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 #input {
-    margin: 0;
-    padding: 10px 12px;
-    border: none;
-    border-bottom: 2px solid #444444;
-    background-color: #191919;
-    color: #DDDDDD;
+    margin: 4px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 #inner-box, #outer-box, #scroll, #text {
@@ -25,15 +42,23 @@ window {
 }
 
 #entry {
-    padding: 8px 12px;
-    margin: 0;
-    border-radius: 0;
-    border-bottom: 1px solid #2a2a2a;
-    background-color: #191919;
-    color: #aaaaaa;
+    padding: 6px 12px;
+    margin: 2px 4px;
+    border-radius: 10px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    transition: all 0.3s ease;
 }
 
 #entry:selected {
-    background-color: #708090;
-    color: #191919;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.08) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }

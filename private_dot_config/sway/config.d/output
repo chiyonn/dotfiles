@@ -1,16 +1,2 @@
 # background
-output * bg /usr/share/backgrounds/dream_board.png fill
-
-# display placement
-# output eDP-1 scale 1.25 pos 4320 720 res 2560x1440
-# XWaylandバグ回避: マイナス座標禁止
-output HDMI-A-1 pos 0 0
-output DP-3 pos 3840 0 transform 180
-
-## mirroring
-# workspace 0 output HDMI-A-1
-# for_window [app_id="at.yrlf.wl_mirror"] {
-#     move to workspace 0
-#     fullscreen enable
-# }
-# exec wl-mirror DP-3
+output * bg /home/chiyonn/.config/themes/glassmorphism/dream_board.png fill

@@ -1,15 +1,15 @@
 {
     "layer": "top",
     "position": "top",
-    "margin-top": 0,
-    "margin-left": 0,
-    "margin-right": 0,
+    "margin-top": 8,
+    "margin-left": 12,
+    "margin-right": 12,
     "modules-left": ["sway/workspaces"],
     "modules-center": ["clock"],
     "modules-right": [
         "network",
-        "custom/brightness",
         "pulseaudio",
+        "custom/brightness",
         "temperature",
         "cpu",
         "memory",
@@ -19,53 +19,51 @@
         "disable-scroll": false,
         "format": "{name}"
     },
-    "custom/brightness": {
-        "tooltip": false,
-        "format": "BRI {}",
-        "exec": "ddcutil getvcp 10 --brief 2>/dev/null | awk '{print $4}'",
-        "interval": 5,
-        "signal": 1,
-        "on-scroll-up": "ddcutil setvcp 10 + 10 && pkill -SIGRTMIN+1 waybar",
-        "on-scroll-down": "ddcutil setvcp 10 - 10 && pkill -SIGRTMIN+1 waybar"
-    },
     "pulseaudio": {
-        "format": "VOL {volume}",
-        "format-bluetooth": "BT {volume}",
-        "format-muted": "MUTE",
-        "format-bluetooth-muted": "BT MUTE",
+        "format": "󰕾 {volume}%",
+        "format-bluetooth": "󰂯 {volume}%",
+        "format-muted": "󰖁 mute",
+        "format-bluetooth-muted": "󰂲 mute",
         "on-click": "pavucontrol"
     },
     "network": {
-        "format-wifi": "NET {essid}",
-        "format-ethernet": "NET ETH",
-        "format-disconnected": "NET --",
+        "format-wifi": "󰤨 {essid}",
+        "format-ethernet": "󰈀 eth",
+        "format-disconnected": "󰤮 off",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
     },
     "temperature": {
         "tooltip": false,
         "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-        "format": "TMP {temperatureC}C",
+        "format": " {temperatureC}°",
         "critical-threshold": 85,
         "interval": 1
     },
     "cpu": {
         "tooltip": false,
-        "format": "CPU {usage}",
+        "format": "󰻠 {usage}%",
         "interval": 1
     },
     "memory": {
         "tooltip": false,
-        "format": "MEM {used:0.1f}G",
+        "format": "󰍛 {used:0.1f}G",
         "interval": 1
+    },
+    "custom/brightness": {
+        "tooltip": false,
+        "format": "󰃠 {}%",
+        "exec": "ddcutil getvcp 10 2>/dev/null | grep -oP 'current value =\\s*\\K[0-9]+'",
+        "interval": 600,
+        "signal": 1
     },
     "custom/notification": {
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-            "notification": "NOTIF *",
-            "none": "NOTIF",
-            "dnd-notification": "DND *",
-            "dnd-none": "DND"
+            "notification": "󰂚",
+            "none": "󰂜",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰪑"
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -76,7 +74,7 @@
     },
     "clock": {
         "tooltip": false,
-        "format": "{:%a %m/%d %H:%M}",
+        "format": "  {:%m/%d %a    󰅐 %H:%M}",
         "interval": 1
     }
 }
