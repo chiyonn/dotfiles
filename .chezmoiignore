@@ -13,6 +13,12 @@ README.md
 .config/wofi/style.css
 .config/swaylock/config
 
+# Theme wallpaper images: too large for git, path is tracked via wallpaper file
+.config/themes/**/*.png
+.config/themes/**/*.jpg
+.config/themes/**/*.jpeg
+.config/themes/**/*.webp
+
 {{- if eq .chezmoi.os "darwin" }}
 # Linux-specific configurations (ignored on macOS)
 .config/dunst
