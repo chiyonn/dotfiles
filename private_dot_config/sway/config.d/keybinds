@@ -20,7 +20,7 @@
     #       $mod+r none
     bindsym $mod+s exec grim -g "$(slurp)" - | wl-copy
     #       $mod+t none
-    bindsym $mod+u exec $browser "https://claude.ai/new?incognito"
+    bindsym $mod+u exec $browser "https://chatgpt.com/?temporary-chat=true"
     bindsym $mod+v split toggle
     #       $mod+w none
     #       $mod+x none
