@@ -4,6 +4,15 @@ README.md
 # Secret environment variables (managed locally per machine)
 .zshenv
 
+# Theme-switch targets: managed by theme-switch.sh, not chezmoi
+# Source of truth is ~/.config/themes/<name>/
+.config/waybar/config
+.config/waybar/style.css
+.config/swaync/config.json
+.config/swaync/style.css
+.config/wofi/style.css
+.config/swaylock/config
+
 {{- if eq .chezmoi.os "darwin" }}
 # Linux-specific configurations (ignored on macOS)
 .config/dunst
