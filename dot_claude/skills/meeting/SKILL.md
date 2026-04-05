@@ -56,39 +56,23 @@ gh project item-edit --id "$DRAFT_ID" --format json
 - **自走している習慣はチェックから外す**（タスク化が楽しさを殺す。Etkin 2016）
 - **習慣が定着したらトラッキングを卒業する**（足場は外す。Wood & Neal 2007）
 
-## Discord 投稿
+## ジャーナル記録
 
-朝会の結果を Discord webhook で投稿する。
+朝会のサマリを週次ジャーナルの当日セクションに追記する。
 
-### 投稿方法
-```bash
-curl -H "Content-Type: application/json" \
-  -d "$PAYLOAD" \
-  "$DISCORD_MEETING_WEBHOOK"
+### 場所
+`~/Documents/notes/journals/journal-YYYY-WXX.md` の当日の日付セクション
+
+### フォーマット
+```markdown
+### 朝会サマリ
+- （3行程度のサマリ）
 ```
 
-環境変数 `DISCORD_MEETING_WEBHOOK` は `~/.zshenv` に格納されている。Bashツール経由で参照可能。
-
-### ペイロード構成
-```json
-{
-  "username": "Meeting Minutes",
-  "embeds": [{
-    "title": "Daily Plan — YYYY-MM-DD",
-    "color": 5814783,
-    "fields": [
-      {
-        "name": "Today's Tasks",
-        "value": "⬜ タスク1 — ゴールライン\n⬜ タスク2 — ゴールライン\n⬜ タスク3 — ゴールライン"
-      },
-      {
-        "name": "Yesterday Review",
-        "value": "振り返り一言"
-      }
-    ]
-  }]
-}
-```
+### 手順
+1. `zk journal` で今週のジャーナルファイルパスを特定（なければ作成される）
+2. 当日の日付セクション（`## YYYY-MM-DD (Day)`）の下に追記
+3. ジャーナルのトーンに合わせる（stream-of-consciousness、スタイル編集しない）
 
 ## GitHub Projects Draft item 更新
 
