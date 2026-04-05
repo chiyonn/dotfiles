@@ -110,7 +110,7 @@ def _parse_old_items(content: str) -> list[str]:
             is_old = False
             if unit == "か月":
                 is_old = True
-            elif unit == "日" and num >= 14:
+            elif unit == "日" and num >= 7:
                 is_old = True
 
             if is_old:
@@ -156,9 +156,10 @@ def delete_item(item_id: str) -> bool:
     run_cli("click", confirm_ref)
     time.sleep(2)
 
-    # 削除成功の検証: 編集ページから離れていればOK
-    content = snapshot_content()
-    if f"/sell/edit/{item_id}" not in content:
+    # 削除成功の検証: Page URLが編集ページから離れていればOK
+    _, output = run_cli("snapshot")
+    url_match = re.search(r'Page URL:\s*(\S+)', output)
+    if url_match and f"/sell/edit/{item_id}" not in url_match.group(1):
         return True
 
     print("(リダイレクト未確認)", end=" ")
